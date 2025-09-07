@@ -58,6 +58,12 @@
             .remove-image {
                 @apply absolute top-1 right-1 bg-red-500 text-white px-2 py-1 rounded-full flex flex items-center justify-center justify-center text-xs cursor-pointer opacity-70 hover:opacity-100 transition-opacity;
             }
+            .captcha-container {
+                @apply flex items-center gap-3;
+            }
+            .captcha-image {
+                @apply bg-gray-100 px-3 py-2 rounded border border-gray-300 text-lg font-bold tracking-widest;
+            }
         }
     </style>
 </head>
@@ -530,9 +536,31 @@
                         <input type="tel" id="loginPhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入手机号" required>
                     </div>
                     
-                    <div class="mb-8">
+                    <div class="mb-6">
                         <label for="loginPassword" class="block text-sm font-medium mb-2">密码</label>
                         <input type="password" id="loginPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入密码" required>
+                    </div>
+                    
+                    <!-- 验证码 -->
+                    <div class="mb-8">
+                        <label for="loginCaptcha" class="block text-sm font-medium mb-2">验证码</label>
+                        <div class="captcha-container">
+                            <input type="text" id="loginCaptcha" class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入验证码" required>
+                            <div id="loginCaptchaImage" class="captcha-image">
+                                <span id="loginCaptchaCode">ABCD</span>
+                                <button type="button" id="refreshLoginCaptcha" class="ml-2 text-sm text-gray-500 hover:text-primary">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="w-4 h-4 text-primary focus:ring-primary/50 border-gray-300 rounded">
+                            <span class="ml-2 text-sm">记住我</span>
+                        </label>
+                        <button type="button" id="forgotPasswordBtn" class="text-sm text-primary hover:underline">忘记密码？</button>
                     </div>
                     
                     <button type="submit" class="btn-primary w-full mb-4">登录</button>
@@ -567,15 +595,75 @@
                         <input type="text" id="registerName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入姓名" required>
                     </div>
                     
-                    <div class="mb-8">
+                    <div class="mb-6">
                         <label for="registerPassword" class="block text-sm font-medium mb-2">密码</label>
                         <input type="password" id="registerPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请设置密码（至少6位）" required>
+                    </div>
+                    
+                    <!-- 验证码 -->
+                    <div class="mb-8">
+                        <label for="registerCaptcha" class="block text-sm font-medium mb-2">验证码</label>
+                        <div class="captcha-container">
+                            <input type="text" id="registerCaptcha" class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入验证码" required>
+                            <div id="registerCaptchaImage" class="captcha-image">
+                                <span id="registerCaptchaCode">WXYZ</span>
+                                <button type="button" id="refreshRegisterCaptcha" class="ml-2 text-sm text-gray-500 hover:text-primary">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     
                     <button type="submit" class="btn-primary w-full mb-4">注册</button>
                     
                     <p class="text-center text-sm text-neutral">
                         已有账号？ <button type="button" id="switchToLogin" class="text-primary hover:underline">立即登录</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 忘记密码模态框 -->
+    <div id="forgotPasswordModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 transform transition-all scale-95 opacity-0" id="forgotPasswordModalContent">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">找回密码</h3>
+                    <button id="closeForgotPasswordModal" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <form id="forgotPasswordForm">
+                    <div class="mb-6">
+                        <label for="forgotPhone" class="block text-sm font-medium mb-2">手机号</label>
+                        <input type="tel" id="forgotPhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入注册的手机号" required>
+                    </div>
+                    
+                    <!-- 验证码 -->
+                    <div class="mb-8">
+                        <label for="forgotCaptcha" class="block text-sm font-medium mb-2">验证码</label>
+                        <div class="captcha-container">
+                            <input type="text" id="forgotCaptcha" class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入验证码" required>
+                            <div id="forgotCaptchaImage" class="captcha-image">
+                                <span id="forgotCaptchaCode">PQRS</span>
+                                <button type="button" id="refreshForgotCaptcha" class="ml-2 text-sm text-gray-500 hover:text-primary">
+                                    <i class="fa fa-refresh"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="newPassword" class="block text-sm font-medium mb-2">新密码</label>
+                        <input type="password" id="newPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请设置新密码（至少6位）" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full mb-4">重置密码</button>
+                    
+                    <p class="text-center text-sm text-neutral">
+                        想起密码了？ <button type="button" id="backToLoginFromForgot" class="text-primary hover:underline">返回登录</button>
                     </p>
                 </form>
             </div>
@@ -620,9 +708,15 @@
             // 隐藏模态框
             hideModal: function(modalId) {
                 const modal = document.getElementById(modalId);
-                const modalContent = modalId === 'loginModal' ? 
-                                    document.getElementById('modalContent') : 
-                                    document.getElementById('registerModalContent');
+                const modalContentMap = {
+                    'loginModal': 'modalContent',
+                    'registerModal': 'registerModalContent',
+                    'forgotPasswordModal': 'forgotPasswordModalContent'
+                };
+                const modalContentId = modalContentMap[modalId];
+                if (!modalContentId) return;
+                
+                const modalContent = document.getElementById(modalContentId);
                 
                 modalContent.classList.remove('scale-100', 'opacity-100');
                 modalContent.classList.add('scale-95', 'opacity-0');
@@ -635,9 +729,15 @@
             // 显示模态框
             showModal: function(modalId) {
                 const modal = document.getElementById(modalId);
-                const modalContent = modalId === 'loginModal' ? 
-                                    document.getElementById('modalContent') : 
-                                    document.getElementById('registerModalContent');
+                const modalContentMap = {
+                    'loginModal': 'modalContent',
+                    'registerModal': 'registerModalContent',
+                    'forgotPasswordModal': 'forgotPasswordModalContent'
+                };
+                const modalContentId = modalContentMap[modalId];
+                if (!modalContentId) return;
+                
+                const modalContent = document.getElementById(modalContentId);
                 
                 modal.classList.remove('hidden');
                 setTimeout(() => {
@@ -648,7 +748,8 @@
             
             // 清除表单
             clearForm: function(formId) {
-                document.getElementById(formId).reset();
+                const form = document.getElementById(formId);
+                if (form) form.reset();
             },
             
             // 生成随机ID
@@ -671,6 +772,28 @@
             // 检查元素是否存在
             elementExists: function(selector) {
                 return document.querySelector(selector) !== null;
+            },
+            
+            // 生成随机验证码
+            generateCaptcha: function(length = 4) {
+                const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // 排除容易混淆的字符
+                let captcha = '';
+                for (let i = 0; i < length; i++) {
+                    captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return captcha;
+            },
+            
+            // 更新验证码显示
+            updateCaptcha: function(elementId, codeElementId) {
+                const captcha = this.generateCaptcha();
+                document.getElementById(codeElementId).textContent = captcha;
+                return captcha;
+            },
+            
+            // 验证验证码
+            validateCaptcha: function(inputValue, captchaValue) {
+                return inputValue.trim().toUpperCase() === captchaValue.trim().toUpperCase();
             }
         };
 
@@ -678,15 +801,31 @@
         const AppData = {
             // 初始化数据
             init: function() {
-                this.users = JSON.parse(localStorage.getItem('nebsForumUsers')) || [];
-                this.submissions = JSON.parse(localStorage.getItem('nebsForumSubmissions')) || [];
-                this.currentUser = JSON.parse(localStorage.getItem('nebsForumCurrentUser')) || null;
-                this.adminPhone = '13262666668'; // 管理员手机号
-                
-                // 如果没有用户，添加一个默认管理员
-                if (this.users.length === 0) {
+                try {
+                    this.users = JSON.parse(localStorage.getItem('nebsForumUsers')) || [];
+                    this.submissions = JSON.parse(localStorage.getItem('nebsForumSubmissions')) || [];
+                    this.currentUser = JSON.parse(localStorage.getItem('nebsForumCurrentUser')) || null;
+                    this.adminPhone = '13262666668'; // 管理员手机号
+                    
+                    // 确保管理员账号存在
+                    this.ensureAdminExists();
+                    
+                    // 保存数据
+                    this.saveToLocalStorage();
+                } catch (error) {
+                    console.error('初始化数据出错:', error);
+                    // 数据损坏时重置
+                    this.resetData();
+                }
+            },
+            
+            // 确保管理员账号存在
+            ensureAdminExists: function() {
+                const adminExists = this.users.some(u => u.phone.trim() === this.adminPhone);
+                if (!adminExists) {
+                    // 添加默认管理员
                     this.users.push({
-                        id: 'user1',
+                        id: 'admin1',
                         phone: this.adminPhone,
                         name: '管理员',
                         password: 'admin123', // 默认密码
@@ -695,19 +834,44 @@
                         joinDate: new Date().toISOString().split('T')[0],
                         isAdmin: true
                     });
-                    this.saveToLocalStorage();
+                } else {
+                    // 确保管理员标识正确
+                    const adminIndex = this.users.findIndex(u => u.phone.trim() === this.adminPhone);
+                    if (adminIndex !== -1) {
+                        this.users[adminIndex].isAdmin = true;
+                    }
                 }
+            },
+            
+            // 重置数据（用于数据损坏时）
+            resetData: function() {
+                this.users = [];
+                this.submissions = [];
+                this.currentUser = null;
+                this.ensureAdminExists();
+                this.saveToLocalStorage();
+                Utils.showNotification('数据已重置，请重新登录', true);
             },
             
             // 保存数据到本地存储
             saveToLocalStorage: function() {
-                localStorage.setItem('nebsForumUsers', JSON.stringify(this.users));
-                localStorage.setItem('nebsForumSubmissions', JSON.stringify(this.submissions));
-                localStorage.setItem('nebsForumCurrentUser', JSON.stringify(this.currentUser));
+                try {
+                    localStorage.setItem('nebsForumUsers', JSON.stringify(this.users));
+                    localStorage.setItem('nebsForumSubmissions', JSON.stringify(this.submissions));
+                    localStorage.setItem('nebsForumCurrentUser', JSON.stringify(this.currentUser));
+                } catch (error) {
+                    console.error('保存数据到本地存储失败:', error);
+                    Utils.showNotification('数据保存失败，请检查浏览器存储权限', true);
+                }
             },
             
             // 用户注册
-            register: function(userData) {
+            register: function(userData, captchaInput, captchaCode) {
+                // 验证验证码
+                if (!Utils.validateCaptcha(captchaInput, captchaCode)) {
+                    return { success: false, message: '验证码不正确' };
+                }
+                
                 // 验证密码
                 if (userData.password.length < 6) {
                     return { success: false, message: '密码长度不能少于6位' };
@@ -719,7 +883,7 @@
                     return { success: false, message: '手机号已被注册' };
                 }
                 
-                // 创建新用户 - 为所有用户设置默认头像
+                // 创建新用户
                 const newUser = {
                     id: `user${this.users.length + 1}`,
                     phone: normalizedPhone,
@@ -739,8 +903,13 @@
             },
             
             // 用户登录
-            login: function(phone, password) {
+            login: function(phone, password, captchaInput, captchaCode) {
                 try {
+                    // 验证验证码
+                    if (!Utils.validateCaptcha(captchaInput, captchaCode)) {
+                        return { success: false, message: '验证码不正确' };
+                    }
+                    
                     // 去除手机号可能的空格，确保格式一致
                     const normalizedPhone = phone.trim();
                     
@@ -770,6 +939,33 @@
                 }
             },
             
+            // 忘记密码 - 重置密码
+            resetPassword: function(phone, newPassword, captchaInput, captchaCode) {
+                // 验证验证码
+                if (!Utils.validateCaptcha(captchaInput, captchaCode)) {
+                    return { success: false, message: '验证码不正确' };
+                }
+                
+                // 验证密码
+                if (newPassword.length < 6) {
+                    return { success: false, message: '密码长度不能少于6位' };
+                }
+                
+                // 查找用户
+                const normalizedPhone = phone.trim();
+                const userIndex = this.users.findIndex(u => u.phone.trim() === normalizedPhone);
+                
+                if (userIndex === -1) {
+                    return { success: false, message: '该手机号未注册' };
+                }
+                
+                // 更新密码
+                this.users[userIndex].password = newPassword;
+                this.saveToLocalStorage();
+                
+                return { success: true, message: '密码已重置，请使用新密码登录' };
+            },
+            
             // 用户登出
             logout: function() {
                 this.currentUser = null;
@@ -792,7 +988,7 @@
                     authorId: this.currentUser.id,
                     authorName: this.currentUser.name,
                     authorPhone: this.currentUser.phone,
-                    authorAvatar: this.currentUser.avatar, // 保存作者头像
+                    authorAvatar: this.currentUser.avatar,
                     status: 'pending', // pending, approved, rejected
                     reviewNote: '',
                     createdAt: new Date().toISOString(),
@@ -841,7 +1037,7 @@
                 return { success: true, submission: submission };
             },
             
-            // 更新用户资料 - 重点修复头像更新功能
+            // 更新用户资料
             updateProfile: function(userData) {
                 try {
                     if (!this.currentUser) {
@@ -868,7 +1064,7 @@
                         this.users[userIndex].password = userData.password;
                     }
                     
-                    // 更新头像 - 允许所有用户更新头像
+                    // 更新头像
                     if (userData.avatar) {
                         this.users[userIndex].avatar = userData.avatar;
                     }
@@ -893,9 +1089,28 @@
                     this.updatePageState();
                     this.bindEvents();
                     this.renderPosts();
+                    this.initCaptchas();
                 } catch (error) {
                     console.error('初始化视图出错:', error);
                     Utils.showNotification('页面加载出错，请刷新重试', true);
+                }
+            },
+            
+            // 初始化验证码
+            initCaptchas: function() {
+                // 登录验证码
+                if (Utils.elementExists('#loginCaptchaCode')) {
+                    Utils.updateCaptcha('loginCaptchaImage', 'loginCaptchaCode');
+                }
+                
+                // 注册验证码
+                if (Utils.elementExists('#registerCaptchaCode')) {
+                    Utils.updateCaptcha('registerCaptchaImage', 'registerCaptchaCode');
+                }
+                
+                // 忘记密码验证码
+                if (Utils.elementExists('#forgotCaptchaCode')) {
+                    Utils.updateCaptcha('forgotCaptchaImage', 'forgotCaptchaCode');
                 }
             },
             
@@ -940,7 +1155,6 @@
                         registerBtn.classList.add('hidden');
                         userDropdown.classList.remove('hidden');
                         usernameDisplay.textContent = currentUser.name;
-                        // 显示用户头像
                         desktopAvatar.src = currentUser.avatar || 'https://picsum.photos/id/64/40/40';
                         desktopAvatar.alt = currentUser.name + '的头像';
                         
@@ -1011,14 +1225,14 @@
                 }
             },
             
-            // 更新审核面板 - 修复无法进入的bug
+            // 更新审核面板
             updateAdminPanel: function() {
                 try {
                     const currentUser = AppData.currentUser;
                     const adminLoginPrompt = document.getElementById('adminLoginPrompt');
                     const adminPanelContainer = document.getElementById('adminPanelContainer');
                     
-                    // 明确检查管理员身份，增加容错处理
+                    // 明确检查管理员身份
                     const isAdmin = currentUser && typeof currentUser.isAdmin === 'boolean' && currentUser.isAdmin;
                     
                     if (isAdmin) {
@@ -1482,7 +1696,7 @@
                 }
             },
             
-            // 渲染个人资料 - 确保头像正确显示
+            // 渲染个人资料
             renderProfile: function() {
                 try {
                     const currentUser = AppData.currentUser;
@@ -1632,6 +1846,12 @@
                         });
                     }
                     
+                    if (Utils.elementExists('#closeForgotPasswordModal')) {
+                        document.getElementById('closeForgotPasswordModal').addEventListener('click', () => {
+                            Utils.hideModal('forgotPasswordModal');
+                        });
+                    }
+                    
                     // 点击模态框外部关闭
                     if (Utils.elementExists('#loginModal')) {
                         document.getElementById('loginModal').addEventListener('click', (e) => {
@@ -1645,6 +1865,14 @@
                         document.getElementById('registerModal').addEventListener('click', (e) => {
                             if (e.target === document.getElementById('registerModal')) {
                                 Utils.hideModal('registerModal');
+                            }
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#forgotPasswordModal')) {
+                        document.getElementById('forgotPasswordModal').addEventListener('click', (e) => {
+                            if (e.target === document.getElementById('forgotPasswordModal')) {
+                                Utils.hideModal('forgotPasswordModal');
                             }
                         });
                     }
@@ -1670,27 +1898,76 @@
                         });
                     }
                     
+                    // 忘记密码相关
+                    if (Utils.elementExists('#forgotPasswordBtn')) {
+                        document.getElementById('forgotPasswordBtn').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.hideModal('loginModal');
+                            setTimeout(() => {
+                                Utils.showModal('forgotPasswordModal');
+                            }, 300);
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#backToLoginFromForgot')) {
+                        document.getElementById('backToLoginFromForgot').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.hideModal('forgotPasswordModal');
+                            setTimeout(() => {
+                                Utils.showModal('loginModal');
+                            }, 300);
+                        });
+                    }
+                    
+                    // 验证码刷新
+                    if (Utils.elementExists('#refreshLoginCaptcha')) {
+                        document.getElementById('refreshLoginCaptcha').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.updateCaptcha('loginCaptchaImage', 'loginCaptchaCode');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#refreshRegisterCaptcha')) {
+                        document.getElementById('refreshRegisterCaptcha').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.updateCaptcha('registerCaptchaImage', 'registerCaptchaCode');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#refreshForgotCaptcha')) {
+                        document.getElementById('refreshForgotCaptcha').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.updateCaptcha('forgotCaptchaImage', 'forgotCaptchaCode');
+                        });
+                    }
+                    
                     // 登录表单提交
                     if (Utils.elementExists('#loginForm')) {
                         document.getElementById('loginForm').addEventListener('submit', (e) => {
                             e.preventDefault();
                             const phone = document.getElementById('loginPhone').value;
                             const password = document.getElementById('loginPassword').value;
+                            const captchaInput = document.getElementById('loginCaptcha').value;
+                            const captchaCode = document.getElementById('loginCaptchaCode').textContent;
                             
                             // 简单验证
-                            if (!phone || !password) {
-                                Utils.showNotification('请输入手机号和密码', true);
+                            if (!phone || !password || !captchaInput) {
+                                Utils.showNotification('请填写完整信息', true);
                                 return;
                             }
                             
-                            const result = AppData.login(phone, password);
+                            const result = AppData.login(phone, password, captchaInput, captchaCode);
                             if (result.success) {
                                 Utils.hideModal('loginModal');
                                 Utils.clearForm('loginForm');
+                                // 刷新验证码
+                                Utils.updateCaptcha('loginCaptchaImage', 'loginCaptchaCode');
                                 this.updatePageState();
                                 this.renderPosts();
                                 Utils.showNotification('登录成功');
                             } else {
+                                // 验证失败时刷新验证码
+                                Utils.updateCaptcha('loginCaptchaImage', 'loginCaptchaCode');
                                 Utils.showNotification(result.message, true);
                             }
                         });
@@ -1703,9 +1980,11 @@
                             const phone = document.getElementById('registerPhone').value;
                             const name = document.getElementById('registerName').value;
                             const password = document.getElementById('registerPassword').value;
+                            const captchaInput = document.getElementById('registerCaptcha').value;
+                            const captchaCode = document.getElementById('registerCaptchaCode').textContent;
                             
                             // 简单验证
-                            if (!phone || !name || !password) {
+                            if (!phone || !name || !password || !captchaInput) {
                                 Utils.showNotification('请填写完整信息', true);
                                 return;
                             }
@@ -1715,14 +1994,57 @@
                                 return;
                             }
                             
-                            const result = AppData.register({ phone, name, password });
+                            const result = AppData.register({ phone, name, password }, captchaInput, captchaCode);
                             if (result.success) {
                                 Utils.hideModal('registerModal');
                                 Utils.clearForm('registerForm');
+                                // 刷新验证码
+                                Utils.updateCaptcha('registerCaptchaImage', 'registerCaptchaCode');
                                 this.updatePageState();
                                 this.renderPosts();
                                 Utils.showNotification('注册成功');
                             } else {
+                                // 验证失败时刷新验证码
+                                Utils.updateCaptcha('registerCaptchaImage', 'registerCaptchaCode');
+                                Utils.showNotification(result.message, true);
+                            }
+                        });
+                    }
+                    
+                    // 忘记密码表单提交
+                    if (Utils.elementExists('#forgotPasswordForm')) {
+                        document.getElementById('forgotPasswordForm').addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const phone = document.getElementById('forgotPhone').value;
+                            const newPassword = document.getElementById('newPassword').value;
+                            const captchaInput = document.getElementById('forgotCaptcha').value;
+                            const captchaCode = document.getElementById('forgotCaptchaCode').textContent;
+                            
+                            // 简单验证
+                            if (!phone || !newPassword || !captchaInput) {
+                                Utils.showNotification('请填写完整信息', true);
+                                return;
+                            }
+                            
+                            if (newPassword.length < 6) {
+                                Utils.showNotification('密码长度不能少于6位', true);
+                                return;
+                            }
+                            
+                            const result = AppData.resetPassword(phone, newPassword, captchaInput, captchaCode);
+                            if (result.success) {
+                                Utils.hideModal('forgotPasswordModal');
+                                Utils.clearForm('forgotPasswordForm');
+                                // 刷新验证码
+                                Utils.updateCaptcha('forgotCaptchaImage', 'forgotCaptchaCode');
+                                // 显示登录模态框
+                                setTimeout(() => {
+                                    Utils.showModal('loginModal');
+                                }, 300);
+                                Utils.showNotification(result.message);
+                            } else {
+                                // 验证失败时刷新验证码
+                                Utils.updateCaptcha('forgotCaptchaImage', 'forgotCaptchaCode');
                                 Utils.showNotification(result.message, true);
                             }
                         });
@@ -1944,7 +2266,7 @@
                         });
                     }
                     
-                    // 头像上传 - 允许所有用户更新头像
+                    // 头像上传
                     if (Utils.elementExists('#avatarUpload')) {
                         document.getElementById('avatarUpload').addEventListener('change', (e) => {
                             const file = e.target.files[0];
@@ -1967,176 +2289,3 @@
                             reader.onload = (event) => {
                                 const result = AppData.updateProfile({ avatar: event.target.result });
                                 if (result.success) {
-                                    // 更新所有地方的头像显示
-                                    document.getElementById('profileAvatar').src = event.target.result;
-                                    document.getElementById('desktopAvatar').src = event.target.result;
-                                    document.getElementById('mobileAvatar').src = event.target.result;
-                                    Utils.showNotification('头像更新成功');
-                                } else {
-                                    Utils.showNotification('更新头像失败，请重试', true);
-                                }
-                            };
-                            
-                            reader.readAsDataURL(file);
-                        });
-                    }
-                    
-                    // 审核管理链接点击事件 - 修复无法进入的bug
-                    if (Utils.elementExists('#adminLink')) {
-                        document.getElementById('adminLink').addEventListener('click', (e) => {
-                            e.preventDefault();
-                            try {
-                                // 确保是管理员才可以访问
-                                if (AppData.currentUser && AppData.currentUser.isAdmin) {
-                                    // 确保审核面板可见
-                                    document.getElementById('adminPanel').classList.remove('hidden');
-                                    // 隐藏其他面板
-                                    document.querySelectorAll('section[id]').forEach(section => {
-                                        if (section.id !== 'adminPanel') {
-                                            section.classList.add('hidden');
-                                        }
-                                    });
-                                    // 更新URL哈希
-                                    window.location.hash = '#adminPanel';
-                                    // 高亮当前页面
-                                    this.highlightCurrentPage();
-                                    // 加载待审核内容
-                                    this.loadPendingSubmissions();
-                                } else {
-                                    Utils.showNotification('你没有权限访问审核管理页面', true);
-                                }
-                            } catch (error) {
-                                console.error('进入审核页面出错:', error);
-                                Utils.showNotification('进入审核页面出错，请重试', true);
-                            }
-                        });
-                    }
-                    
-                    // 移动端审核管理链接点击事件 - 修复无法进入的bug
-                    if (Utils.elementExists('#mobileAdminLink')) {
-                        document.getElementById('mobileAdminLink').addEventListener('click', (e) => {
-                            e.preventDefault();
-                            try {
-                                // 确保是管理员才可以访问
-                                if (AppData.currentUser && AppData.currentUser.isAdmin) {
-                                    // 关闭移动菜单
-                                    document.getElementById('mobileMenu').classList.add('hidden');
-                                    // 确保审核面板可见
-                                    document.getElementById('adminPanel').classList.remove('hidden');
-                                    // 隐藏其他面板
-                                    document.querySelectorAll('section[id]').forEach(section => {
-                                        if (section.id !== 'adminPanel') {
-                                            section.classList.add('hidden');
-                                        }
-                                    });
-                                    // 更新URL哈希
-                                    window.location.hash = '#adminPanel';
-                                    // 高亮当前页面
-                                    this.highlightCurrentPage();
-                                    // 加载待审核内容
-                                    this.loadPendingSubmissions();
-                                } else {
-                                    Utils.showNotification('你没有权限访问审核管理页面', true);
-                                }
-                            } catch (error) {
-                                console.error('进入审核页面出错:', error);
-                                Utils.showNotification('进入审核页面出错，请重试', true);
-                            }
-                        });
-                    }
-                    
-                    // 页面导航链接
-                    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
-                        link.addEventListener('click', (e) => {
-                            const targetId = e.currentTarget.getAttribute('href').substring(1);
-                            
-                            // 隐藏所有部分
-                            document.querySelectorAll('section[id]').forEach(section => {
-                                section.classList.add('hidden');
-                            });
-                            
-                            // 显示目标部分
-                            const targetSection = document.getElementById(targetId);
-                            if (targetSection) {
-                                targetSection.classList.remove('hidden');
-                                
-                                // 关闭移动菜单
-                                document.getElementById('mobileMenu').classList.add('hidden');
-                                
-                                // 平滑滚动到顶部
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                            } else {
-                                Utils.showNotification('页面不存在', true);
-                            }
-                        });
-                    });
-                } catch (error) {
-                    console.error('绑定事件出错:', error);
-                }
-            },
-            
-            // 设置活跃的标签页
-            setActiveTab: function(buttonId) {
-                try {
-                    // 移除所有按钮的活跃状态
-                    document.querySelectorAll('#allPostsBtn, #confessionBtn, #complaintBtn, #questionBtn').forEach(btn => {
-                        btn.classList.remove('bg-primary', 'text-white');
-                        btn.classList.add('bg-white', 'text-dark', 'border', 'border-gray-200');
-                    });
-                    
-                    // 设置当前按钮为活跃状态
-                    const activeBtn = document.getElementById(buttonId);
-                    if (activeBtn) {
-                        activeBtn.classList.remove('bg-white', 'text-dark', 'border', 'border-gray-200');
-                        activeBtn.classList.add('bg-primary', 'text-white');
-                    }
-                } catch (error) {
-                    console.error('设置活跃标签页出错:', error);
-                }
-            },
-            
-            // 设置活跃的管理员标签页
-            setActiveAdminTab: function(buttonId) {
-                try {
-                    // 移除所有按钮的活跃状态
-                    document.querySelectorAll('#pendingReviewsBtn, #approvedBtn, #rejectedBtn').forEach(btn => {
-                        btn.classList.remove('bg-primary', 'text-white');
-                        btn.classList.add('bg-white', 'text-dark', 'border', 'border-gray-200');
-                    });
-                    
-                    // 设置当前按钮为活跃状态
-                    const activeBtn = document.getElementById(buttonId);
-                    if (activeBtn) {
-                        activeBtn.classList.remove('bg-white', 'text-dark', 'border', 'border-gray-200');
-                        activeBtn.classList.add('bg-primary', 'text-white');
-                    }
-                } catch (error) {
-                    console.error('设置活跃管理员标签页出错:', error);
-                }
-            }
-        };
-
-        // 初始化应用
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                AppData.init();
-                ViewController.init();
-                
-                // 默认显示首页
-                const hash = window.location.hash || '#home';
-                document.querySelectorAll('section[id]').forEach(section => {
-                    section.classList.add('hidden');
-                });
-                const defaultSection = document.querySelector(hash);
-                if (defaultSection) {
-                    defaultSection.classList.remove('hidden');
-                } else {
-                    document.getElementById('home').classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error('应用初始化出错:', error);
-                Utils.showNotification('应用加载失败，请刷新页面重试', true);
-            }
-        });
-    </script>
-    
