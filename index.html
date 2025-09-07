@@ -41,27 +41,27 @@
                 @apply bg-primary text-white px-4 py-2 rounded-lg transition-all duration-300 hover:bg-primary/90 focus:ring-2 focus:ring-primary/50 focus:outline-none;
             }
             .btn-secondary {
-                @apply bg-white text-primary border border-primary px-4 py-2 rounded-lg transition-all duration-300 hover:bg-primary/5 focus:ring-2 focus:ring-primary/50 focus:outline-none;
+                @apply bg-white text-primary border border-primary px-4 py-2 rounded-lg transition transition-all duration-300 hover:bg-primary/5 focus:ring-2 focus:ring-primary/50 focus:outline-none;
             }
             .section-indicator {
-                @apply w-3 h-3 rounded-full inline-block mr-2;
+                @apply w-3 h-3 rounded-full inline inline-block mr-2;
             }
             .image-preview-container {
                 @apply grid grid-cols-3 gap-3 mt-3;
             }
             .image-preview {
-                @apply relative aspect-square bg-gray-100 rounded-md overflow-hidden;
+                @apply relative relative aspect-square bg-gray-100 rounded-md overflow-hidden;
             }
             .image-preview img {
                 @apply w-full h-full object-cover;
             }
             .remove-image {
-                @apply absolute top-1 right-1 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs cursor-pointer opacity-70 hover:opacity-100 transition-opacity;
+                @apply absolute top-1 right-1 bg-red-500 text-white px-2 py-1 rounded-full flex flex items-center justify-center justify-center text-xs cursor-pointer opacity-70 hover:opacity-100 transition-opacity;
             }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-dark min-h-screen flex flex-col">
+<body class="bg-gray-50 text-dark min-h-screen-screen flex flex flex-col">
     <!-- 导航栏 -->
     <header id="navbar" class="bg-white shadow-sm fixed w-full z-50 transition-all duration-300">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -74,22 +74,22 @@
             
             <!-- 桌面导航 -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="font-medium hover:text-primary transition-colors">首页</a>
-                <a href="#forum" class="font-medium hover:text-primary transition-colors">论坛板块</a>
-                <a href="#submit" class="font-medium hover:text-primary transition-colors">发布内容</a>
+                <a href="#home" class="nav-link font-medium hover:text-primary transition-colors">首页</a>
+                <a href="#forum" class="nav-link font-medium hover:text-primary transition-colors">论坛板块</a>
+                <a href="#submit" class="nav-link font-medium hover:text-primary transition-colors">发布内容</a>
                 <div id="userMenu" class="flex items-center space-x-4">
                     <button id="loginBtn" class="btn-secondary hidden">登录</button>
                     <button id="registerBtn" class="btn-primary hidden">注册</button>
                     <div id="userDropdown" class="relative hidden">
                         <button id="userBtn" class="flex items-center space-x-2 focus:outline-none">
-                            <img src="https://picsum.photos/id/64/40/40" alt="用户头像" class="w-8 h-8 rounded-full object-cover border-2 border-primary">
+                            <img id="desktopAvatar" src="https://picsum.photos/id/64/40/40" alt="用户头像" class="w-8 h-8 rounded-full object-cover border-2 border-primary">
                             <span id="usernameDisplay" class="font-medium"></span>
                             <i class="fa fa-caret-down text-sm"></i>
                         </button>
                         <div id="dropdownMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-10 hidden">
-                            <a href="#profile" class="block px-4 py-2 hover:bg-gray-100 transition-colors">个人资料</a>
-                            <a href="#mySubmissions" class="block px-4 py-2 hover:bg-gray-100 transition-colors">我的发布</a>
-                            <a href="#adminPanel" id="adminLink" class="block px-4 py-2 hover:bg-gray-100 transition-colors hidden">审核管理</a>
+                            <a href="#profile" class="dropdown-item block px-4 py-2 hover:bg-gray-100 transition-colors">个人资料</a>
+                            <a href="#mySubmissions" class="dropdown-item block px-4 py-2 hover:bg-gray-100 transition-colors">我的发布</a>
+                            <a href="#adminPanel" id="adminLink" class="dropdown-item block px-4 py-2 hover:bg-gray-100 transition-colors hidden">审核管理</a>
                             <div class="border-t border-gray-200 my-1"></div>
                             <a href="#" id="logoutBtn" class="block px-4 py-2 hover:bg-gray-100 transition-colors text-red-500">退出登录</a>
                         </div>
@@ -106,20 +106,20 @@
         <!-- 移动端导航菜单 -->
         <div id="mobileMenu" class="md:hidden bg-white shadow-md absolute w-full left-0 top-full py-4 px-6 hidden">
             <nav class="flex flex-col space-y-4">
-                <a href="#home" class="font-medium hover:text-primary transition-colors py-2">首页</a>
-                <a href="#forum" class="font-medium hover:text-primary transition-colors py-2">论坛板块</a>
-                <a href="#submit" class="font-medium hover:text-primary transition-colors py-2">发布内容</a>
+                <a href="#home" class="mobile-nav-link font-medium hover:text-primary transition-colors py-2">首页</a>
+                <a href="#forum" class="mobile-nav-link font-medium hover:text-primary transition-colors py-2">论坛板块</a>
+                <a href="#submit" class="mobile-nav-link font-medium hover:text-primary transition-colors py-2">发布内容</a>
                 <div class="flex flex-col space-y-3 pt-2 border-t border-gray-100">
                     <button id="mobileLoginBtn" class="btn-secondary">登录</button>
                     <button id="mobileRegisterBtn" class="btn-primary">注册</button>
                     <div id="mobileUserMenu" class="hidden">
                         <div class="flex items-center space-x-3 mb-3">
-                            <img src="https://picsum.photos/id/64/40/40" alt="用户头像" class="w-10 h-10 rounded-full object-cover border-2 border-primary">
+                            <img id="mobileAvatar" src="https://picsum.photos/id/64/40/40" alt="用户头像" class="w-10 h-10 rounded-full object-cover border-2 border-primary">
                             <span id="mobileUsername" class="font-medium"></span>
                         </div>
-                        <a href="#profile" class="block py-2 hover:text-primary transition-colors">个人资料</a>
-                        <a href="#mySubmissions" class="block py-2 hover:text-primary transition-colors">我的发布</a>
-                        <a href="#adminPanel" id="mobileAdminLink" class="block py-2 hover:text-primary transition-colors hidden">审核管理</a>
+                        <a href="#profile" class="mobile-dropdown-item block py-2 hover:text-primary transition-colors">个人资料</a>
+                        <a href="#mySubmissions" class="mobile-dropdown-item block py-2 hover:text-primary transition-colors">我的发布</a>
+                        <a href="#adminPanel" id="mobileAdminLink" class="mobile-dropdown-item block py-2 hover:text-primary transition-colors hidden">审核管理</a>
                         <a href="#" id="mobileLogoutBtn" class="block py-2 text-red-500 hover:text-red-600 transition-colors">退出登录</a>
                     </div>
                 </div>
@@ -381,23 +381,37 @@
                         <button id="rejectedBtn" class="px-4 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm hover:border-primary hover:text-primary transition-colors">已拒绝</button>
                     </div>
 
-                    <div id="pendingSubmissions" class="space-y-6">
+                    <div id="pendingReviewsContainer" class="space-y-6">
                         <!-- 待审核内容会通过JavaScript动态生成 -->
-                        <div id="noPendingSubmissions" class="py-20 text-center">
+                        <div id="noPendingReviews" class="py-20 text-center">
                             <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <i class="fa fa-check-circle text-3xl text-gray-400"></i>
                             </div>
                             <h3 class="text-xl font-medium mb-2">暂无待审核内容</h3>
-                            <p class="text-neutral">所有内容都已审核完毕</p>
+                            <p class="text-neutral">所有提交的内容都已审核完毕</p>
                         </div>
                     </div>
 
-                    <div id="approvedSubmissions" class="space-y-6 hidden">
+                    <div id="approvedContainer" class="space-y-6 hidden">
                         <!-- 已通过内容会通过JavaScript动态生成 -->
+                        <div id="noApproved" class="py-20 text-center">
+                            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fa fa-check-circle text-3xl text-gray-400"></i>
+                            </div>
+                            <h3 class="text-xl font-medium mb-2">暂无已通过内容</h3>
+                            <p class="text-neutral">还没有通过审核的内容</p>
+                        </div>
                     </div>
 
-                    <div id="rejectedSubmissions" class="space-y-6 hidden">
+                    <div id="rejectedContainer" class="space-y-6 hidden">
                         <!-- 已拒绝内容会通过JavaScript动态生成 -->
+                        <div id="noRejected" class="py-20 text-center">
+                            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <i class="fa fa-times-circle text-3xl text-gray-400"></i>
+                            </div>
+                            <h3 class="text-xl font-medium mb-2">暂无已拒绝内容</h3>
+                            <p class="text-neutral">还没有拒绝审核的内容</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -419,26 +433,37 @@
 
                 <div id="profileContainer" class="hidden">
                     <div class="text-center mb-10">
-                        <img id="profileAvatar" src="https://picsum.photos/id/64/100/100" alt="用户头像" class="w-24 h-24 rounded-full object-cover border-4 border-primary mx-auto mb-4">
-                        <h3 id="profileUsername" class="text-2xl font-bold mb-2"></h3>
-                        <p id="profileJoinDate" class="text-neutral"></p>
-                        <p id="profileRole" class="text-sm mt-2 hidden"></p>
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <img id="profileAvatar" src="https://picsum.photos/id/64/128/128" alt="用户头像" class="w-full h-full rounded-full object-cover border-4 border-primary/20">
+                            <label for="avatarUpload" class="absolute bottom-0 right-0 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center cursor-pointer hover:bg-primary/90 transition-colors">
+                                <i class="fa fa-camera"></i>
+                                <input id="avatarUpload" type="file" class="hidden" accept="image/*">
+                            </label>
+                        </div>
+                        <h3 id="profileName" class="text-xl font-bold mb-1"></h3>
+                        <p id="profileJoinDate" class="text-sm text-neutral"></p>
                     </div>
 
                     <form id="profileForm" class="bg-light rounded-xl p-6 md:p-8 shadow-sm">
                         <div class="mb-6">
-                            <label for="profileName" class="block text-sm font-medium mb-2">昵称</label>
-                            <input type="text" id="profileName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors">
+                            <label for="profilePhone" class="block text-sm font-medium mb-2">手机号</label>
+                            <input type="text" id="profilePhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 cursor-not-allowed" readonly>
                         </div>
                         
                         <div class="mb-6">
-                            <label for="profilePhone" class="block text-sm font-medium mb-2">手机号</label>
-                            <input type="tel" id="profilePhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 bg-gray-100 cursor-not-allowed" disabled>
+                            <label for="editName" class="block text-sm font-medium mb-2">姓名</label>
+                            <input type="text" id="editName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors">
                         </div>
                         
-                        <div class="mb-8">
-                            <label for="profileBio" class="block text-sm font-medium mb-2">个人简介</label>
-                            <textarea id="profileBio" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors resize-none"></textarea>
+                        <div class="mb-6">
+                            <label for="editBio" class="block text-sm font-medium mb-2">个人简介</label>
+                            <textarea id="editBio" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors resize-none" placeholder="简单介绍一下自己吧..."></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="editPassword" class="block text-sm font-medium mb-2">修改密码（不修改请留空）</label>
+                            <input type="password" id="editPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入新密码">
+                            <p class="text-xs text-neutral mt-1">密码长度至少6位</p>
                         </div>
                         
                         <div class="flex justify-end">
@@ -453,275 +478,257 @@
     </main>
 
     <!-- 页脚 -->
-    <footer class="bg-dark text-white py-12">
+    <footer class="bg-dark text-white py-10">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-6">
-                        <div class="bg-white text-primary p-2 rounded-lg">
-                            <i class="fa fa-comments text-xl"></i>
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="bg-white text-primary p-1 rounded-lg">
+                            <i class="fa fa-comments"></i>
                         </div>
-                        <h3 class="text-xl font-bold">上海NEBS学生论坛</h3>
+                        <h2 class="text-xl font-bold">上海NEBS学生论坛</h2>
                     </div>
-                    <p class="text-gray-400 mb-6">为上海NEBS学校学生提供一个安全、健康的交流平台，让每一个声音都能被听见。</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-weixin text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-weibo text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
-                            <i class="fa fa-qq text-xl"></i>
-                        </a>
-                    </div>
+                    <p class="text-gray-400 text-sm max-w-md">
+                        为NEBS学生提供交流和分享的平台，让校园生活更加丰富多彩
+                    </p>
                 </div>
                 
-                <div>
-                    <h4 class="text-lg font-semibold mb-6">快速链接</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
-                        <li><a href="#forum" class="text-gray-400 hover:text-white transition-colors">论坛板块</a></li>
-                        <li><a href="#submit" class="text-gray-400 hover:text-white transition-colors">发布内容</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">使用须知</a></li>
-                    </ul>
+                <div class="flex flex-col items-center md:items-end">
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2023 上海NEBS学生论坛 版权所有
+                    </p>
                 </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                <p>© 2023 上海NEBS学生论坛 版权所有</p>
             </div>
         </div>
     </footer>
 
     <!-- 登录模态框 -->
     <div id="loginModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6 md:p-8 transform transition-all scale-95 opacity-0" id="modalContent">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">用户登录</h3>
-                <button id="closeLoginModal" class="text-gray-400 hover:text-dark focus:outline-none">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <form id="loginForm">
-                <div class="mb-6">
-                    <label for="loginPhone" class="block text-sm font-medium mb-2">手机号</label>
-                    <input type="tel" id="loginPhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入手机号" required>
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 transform transition-all scale-95 opacity-0" id="modalContent">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">登录</h3>
+                    <button id="closeLoginModal" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
                 </div>
                 
-                <div class="mb-6">
-                    <label for="loginPassword" class="block text-sm font-medium mb-2">密码</label>
-                    <input type="password" id="loginPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入密码" required>
-                </div>
-                
-                <div class="flex items-center justify-between mb-6">
-                    <label class="flex items-center">
-                        <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary/50 border-gray-300 rounded">
-                        <span class="ml-2 text-sm">记住我</span>
-                    </label>
-                    <a href="#" class="text-sm text-primary hover:underline">忘记密码？</a>
-                </div>
-                
-                <button type="submit" class="w-full btn-primary">登录</button>
-            </form>
-            
-            <div class="mt-6 text-center">
-                <p class="text-sm">还没有账号？ <button id="switchToRegister" class="text-primary hover:underline">立即注册</button></p>
+                <form id="loginForm">
+                    <div class="mb-6">
+                        <label for="loginPhone" class="block text-sm font-medium mb-2">手机号</label>
+                        <input type="tel" id="loginPhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入手机号" required>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="loginPassword" class="block text-sm font-medium mb-2">密码</label>
+                        <input type="password" id="loginPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入密码" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full mb-4">登录</button>
+                    
+                    <p class="text-center text-sm text-neutral">
+                        还没有账号？ <button type="button" id="switchToRegister" class="text-primary hover:underline">立即注册</button>
+                    </p>
+                </form>
             </div>
         </div>
     </div>
 
     <!-- 注册模态框 -->
     <div id="registerModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-md p-6 md:p-8 transform transition-all scale-95 opacity-0" id="registerModalContent">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">用户注册</h3>
-                <button id="closeRegisterModal" class="text-gray-400 hover:text-dark focus:outline-none">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <form id="registerForm">
-                <div class="mb-6">
-                    <label for="registerPhone" class="block text-sm font-medium mb-2">手机号</label>
-                    <input type="tel" id="registerPhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入手机号" required>
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 transform transition-all scale-95 opacity-0" id="registerModalContent">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">注册</h3>
+                    <button id="closeRegisterModal" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                        <i class="fa fa-times text-xl"></i>
+                    </button>
                 </div>
                 
-                <div class="mb-6">
-                    <label for="registerName" class="block text-sm font-medium mb-2">昵称</label>
-                    <input type="text" id="registerName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请设置昵称" required>
-                </div>
-                
-                <div class="mb-6">
-                    <label for="registerPassword" class="block text-sm font-medium mb-2">密码</label>
-                    <input type="password" id="registerPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请设置密码（至少6位）" required minlength="6">
-                </div>
-                
-                <div class="mb-6">
-                    <label for="registerConfirmPassword" class="block text-sm font-medium mb-2">确认密码</label>
-                    <input type="password" id="registerConfirmPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请再次输入密码" required>
-                </div>
-                
-                <div class="mb-6">
-                    <label class="flex items-start">
-                        <input type="checkbox" class="w-5 h-5 text-primary focus:ring-primary/50 border-gray-300 rounded mt-1" required>
-                        <span class="ml-2 text-sm">我已阅读并同意<a href="#" class="text-primary hover:underline">用户协议</a>和<a href="#" class="text-primary hover:underline">隐私政策</a></span>
-                    </label>
-                </div>
-                
-                <button type="submit" class="w-full btn-primary">注册</button>
-            </form>
-            
-            <div class="mt-6 text-center">
-                <p class="text-sm">已有账号？ <button id="switchToLogin" class="text-primary hover:underline">立即登录</button></p>
+                <form id="registerForm">
+                    <div class="mb-6">
+                        <label for="registerPhone" class="block text-sm font-medium mb-2">手机号</label>
+                        <input type="tel" id="registerPhone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入手机号" required>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="registerName" class="block text-sm font-medium mb-2">姓名</label>
+                        <input type="text" id="registerName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请输入姓名" required>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <label for="registerPassword" class="block text-sm font-medium mb-2">密码</label>
+                        <input type="password" id="registerPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors" placeholder="请设置密码（至少6位）" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full mb-4">注册</button>
+                    
+                    <p class="text-center text-sm text-neutral">
+                        已有账号？ <button type="button" id="switchToLogin" class="text-primary hover:underline">立即登录</button>
+                    </p>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- 审核模态框 -->
-    <div id="reviewModal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-3xl p-6 md:p-8 transform transition-all scale-95 opacity-0 max-h-[90vh] overflow-y-auto" id="reviewModalContent">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold">审核内容</h3>
-                <button id="closeReviewModal" class="text-gray-400 hover:text-dark focus:outline-none">
-                    <i class="fa fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <div id="reviewContent" class="mb-6">
-                <h4 id="reviewTitle" class="text-lg font-semibold mb-2"></h4>
-                <p id="reviewCategory" class="text-sm text-neutral mb-4"></p>
-                <div id="reviewImages" class="image-preview-container mb-4"></div>
-                <div id="reviewBody" class="bg-light p-4 rounded-lg mb-4"></div>
-                <div class="flex flex-wrap gap-4 text-sm">
-                    <span>发布人: <span id="reviewAuthor" class="font-medium"></span></span>
-                    <span>发布人手机号: <span id="reviewAuthorPhone" class="font-medium"></span></span>
-                    <span>发布时间: <span id="reviewTime"></span></span>
-                </div>
-            </div>
-            
-            <div class="mb-6">
-                <label for="reviewNote" class="block text-sm font-medium mb-2">审核备注（可选）</label>
-                <textarea id="reviewNote" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors resize-none" placeholder="请输入审核备注（将通知给发布人）"></textarea>
-            </div>
-            
-            <div class="mb-6">
-                <label class="flex items-center">
-                    <input type="checkbox" id="reviewAnonymous" class="w-5 h-5 text-primary focus:ring-primary/50 border-gray-300 rounded">
-                    <span class="ml-2 text-sm">允许匿名发布</span>
-                </label>
-            </div>
-            
-            <div class="flex justify-end gap-4">
-                <button id="rejectSubmission" class="px-6 py-2 bg-white text-red-500 border border-red-500 rounded-lg transition-all duration-300 hover:bg-red-50 focus:outline-none">
-                    拒绝
-                </button>
-                <button id="approveSubmission" class="px-6 py-2 bg-green-500 text-white rounded-lg transition-all duration-300 hover:bg-green-600 focus:outline-none">
-                    通过并发布
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 通知提示 -->
+    <!-- 通知组件 -->
     <div id="notification" class="fixed bottom-6 right-6 bg-dark text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center z-50">
-        <i id="notificationIcon" class="fa fa-check-circle mr-3 text-green-400"></i>
+        <i id="notificationIcon" class="fa fa-check-circle mr-3"></i>
         <span id="notificationMessage"></span>
     </div>
 
     <script>
-        // 数据模型
-        const AppData = {
-            // 管理员手机号
-            adminPhone: '13262666668',
-            
-            // 当前登录用户
-            currentUser: null,
-            
-            // 用户列表
-            users: [],
-            
-            // 投稿状态
-            submissionStatus: {
-                PENDING: 'pending',
-                APPROVED: 'approved',
-                REJECTED: 'rejected'
-            },
-            
-            // 板块配置
-            categories: {
-                'confession': {
-                    name: '表白墙',
-                    color: 'confession'
-                },
-                'complaint': {
-                    name: '吐槽区',
-                    color: 'complaint'
-                },
-                'question': {
-                    name: '提问区',
-                    color: 'question'
-                }
-            },
-            
-            // 投稿列表（初始为空）
-            submissions: [],
-            
-            // 从本地存储加载数据
-            loadFromLocalStorage() {
-                const savedUsers = localStorage.getItem('nebs_users');
-                const savedSubmissions = localStorage.getItem('nebs_submissions');
-                const savedCurrentUser = localStorage.getItem('nebs_currentUser');
+        // 工具函数
+        const Utils = {
+            // 显示通知
+            showNotification: function(message, isError = false) {
+                const notification = document.getElementById('notification');
+                const notificationIcon = document.getElementById('notificationIcon');
+                const notificationMessage = document.getElementById('notificationMessage');
                 
-                if (savedUsers) this.users = JSON.parse(savedUsers);
-                if (savedSubmissions) this.submissions = JSON.parse(savedSubmissions);
-                if (savedCurrentUser) this.currentUser = JSON.parse(savedCurrentUser);
+                notificationMessage.textContent = message;
+                
+                // 设置图标
+                if (isError) {
+                    notificationIcon.className = 'fa fa-times-circle mr-3 text-red-400';
+                } else {
+                    notificationIcon.className = 'fa fa-check-circle mr-3';
+                }
+                
+                // 显示通知
+                notification.classList.remove('translate-y-20', 'opacity-0');
+                notification.classList.add('translate-y-0', 'opacity-100');
+                
+                // 3秒后隐藏
+                setTimeout(() => {
+                    notification.classList.remove('translate-y-0', 'opacity-100');
+                    notification.classList.add('translate-y-20', 'opacity-0');
+                }, 3000);
+            },
+            
+            // 隐藏模态框
+            hideModal: function(modalId) {
+                const modal = document.getElementById(modalId);
+                const modalContent = modalId === 'loginModal' ? 
+                                    document.getElementById('modalContent') : 
+                                    document.getElementById('registerModalContent');
+                
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                modalContent.classList.add('scale-95', 'opacity-0');
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            },
+            
+            // 显示模态框
+            showModal: function(modalId) {
+                const modal = document.getElementById(modalId);
+                const modalContent = modalId === 'loginModal' ? 
+                                    document.getElementById('modalContent') : 
+                                    document.getElementById('registerModalContent');
+                
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            },
+            
+            // 清除表单
+            clearForm: function(formId) {
+                document.getElementById(formId).reset();
+            },
+            
+            // 生成随机ID
+            generateId: function(prefix = '') {
+                return prefix + Date.now() + Math.floor(Math.random() * 1000);
+            },
+            
+            // 格式化日期
+            formatDate: function(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleString('zh-CN', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            },
+            
+            // 检查元素是否存在
+            elementExists: function(selector) {
+                return document.querySelector(selector) !== null;
+            }
+        };
+
+        // 应用数据管理
+        const AppData = {
+            // 初始化数据
+            init: function() {
+                this.users = JSON.parse(localStorage.getItem('nebsForumUsers')) || [];
+                this.submissions = JSON.parse(localStorage.getItem('nebsForumSubmissions')) || [];
+                this.currentUser = JSON.parse(localStorage.getItem('nebsForumCurrentUser')) || null;
+                this.adminPhone = '13262666668'; // 管理员手机号
+                
+                // 如果没有用户，添加一个默认管理员
+                if (this.users.length === 0) {
+                    this.users.push({
+                        id: 'user1',
+                        phone: this.adminPhone,
+                        name: '管理员',
+                        password: 'admin123', // 默认密码
+                        bio: '论坛管理员',
+                        avatar: 'https://picsum.photos/id/1005/100/100',
+                        joinDate: new Date().toISOString().split('T')[0],
+                        isAdmin: true
+                    });
+                    this.saveToLocalStorage();
+                }
             },
             
             // 保存数据到本地存储
-            saveToLocalStorage() {
-                localStorage.setItem('nebs_users', JSON.stringify(this.users));
-                localStorage.setItem('nebs_submissions', JSON.stringify(this.submissions));
-                localStorage.setItem('nebs_currentUser', JSON.stringify(this.currentUser));
+            saveToLocalStorage: function() {
+                localStorage.setItem('nebsForumUsers', JSON.stringify(this.users));
+                localStorage.setItem('nebsForumSubmissions', JSON.stringify(this.submissions));
+                localStorage.setItem('nebsForumCurrentUser', JSON.stringify(this.currentUser));
             },
             
-            // 用户登录（使用手机号）
-            login(phone, password) {
-                // 查找用户
-                const user = this.users.find(u => u.phone === phone && u.password === password);
-                if (user) {
-                    // 检查是否为管理员
-                    user.isAdmin = phone === this.adminPhone;
-                    
-                    this.currentUser = user;
-                    this.saveToLocalStorage();
-                    return { success: true, user };
+            // 用户注册
+            register: function(userData) {
+                // 验证密码
+                if (userData.password.length < 6) {
+                    return { success: false, message: '密码长度不能少于6位' };
                 }
                 
-                return { success: false, message: '手机号或密码错误' };
-            },
-            
-            // 用户注册（使用手机号）
-            register(userData) {
                 // 检查手机号是否已存在
-                if (this.users.some(u => u.phone === userData.phone)) {
+                const normalizedPhone = userData.phone.trim();
+                if (this.users.some(u => u.phone.trim() === normalizedPhone)) {
                     return { success: false, message: '手机号已被注册' };
                 }
                 
-                // 检查是否是管理员手机号注册
-                const isAdmin = userData.phone === this.adminPhone;
-                
-                // 创建新用户
+                // 创建新用户 - 为所有用户设置默认头像
                 const newUser = {
                     id: `user${this.users.length + 1}`,
-                    phone: userData.phone,
-                    name: userData.name,
+                    phone: normalizedPhone,
+                    name: userData.name.trim(),
                     password: userData.password,
                     bio: '',
                     avatar: `https://picsum.photos/id/${200 + this.users.length}/100/100`,
                     joinDate: new Date().toISOString().split('T')[0],
-                    isAdmin: isAdmin
+                    isAdmin: normalizedPhone === this.adminPhone
                 };
                 
                 this.users.push(newUser);
@@ -731,1296 +738,1405 @@
                 return { success: true, user: newUser };
             },
             
+            // 用户登录
+            login: function(phone, password) {
+                try {
+                    // 去除手机号可能的空格，确保格式一致
+                    const normalizedPhone = phone.trim();
+                    
+                    // 查找用户
+                    const user = this.users.find(u => 
+                        u.phone.trim() === normalizedPhone
+                    );
+                    
+                    // 先检查用户是否存在，再验证密码
+                    if (!user) {
+                        return { success: false, message: '用户不存在' };
+                    }
+                    
+                    // 严格验证密码
+                    if (user.password !== password) {
+                        return { success: false, message: '密码错误' };
+                    }
+                    
+                    // 设置管理员标识
+                    user.isAdmin = normalizedPhone === this.adminPhone;
+                    this.currentUser = { ...user };
+                    this.saveToLocalStorage();
+                    return { success: true, user: this.currentUser };
+                } catch (error) {
+                    console.error('登录过程出错:', error);
+                    return { success: false, message: '登录过程中出现错误，请重试' };
+                }
+            },
+            
             // 用户登出
-            logout() {
+            logout: function() {
                 this.currentUser = null;
                 this.saveToLocalStorage();
             },
             
-            // 提交新投稿
-            submitSubmission(submissionData) {
+            // 提交内容
+            submitContent: function(submissionData) {
                 if (!this.currentUser) {
                     return { success: false, message: '请先登录' };
                 }
                 
                 const newSubmission = {
                     id: `sub${this.submissions.length + 1}`,
-                    title: submissionData.title,
+                    title: submissionData.title.trim(),
                     category: submissionData.category,
-                    content: submissionData.content,
-                    images: submissionData.images || [], // 存储图片的base64编码
+                    content: submissionData.content.trim(),
+                    images: submissionData.images || [],
+                    anonymousRequest: submissionData.anonymousRequest,
                     authorId: this.currentUser.id,
                     authorName: this.currentUser.name,
                     authorPhone: this.currentUser.phone,
-                    anonymousRequest: submissionData.anonymousRequest,
-                    anonymous: false, // 默认不匿名，由管理员决定
-                    status: this.submissionStatus.PENDING,
-                    submitTime: new Date().toISOString(),
-                    reviewTime: null,
-                    reviewNote: ''
+                    authorAvatar: this.currentUser.avatar, // 保存作者头像
+                    status: 'pending', // pending, approved, rejected
+                    reviewNote: '',
+                    createdAt: new Date().toISOString(),
+                    approvedAt: null
                 };
                 
-                this.submissions.unshift(newSubmission); // 添加到最前面
+                this.submissions.push(newSubmission);
                 this.saveToLocalStorage();
                 
                 return { success: true, submission: newSubmission };
             },
             
-            // 获取分类名称
-            getCategoryName(category) {
-                return this.categories[category]?.name || '其他';
+            // 获取用户的所有投稿
+            getUserSubmissions: function() {
+                if (!this.currentUser) return [];
+                return this.submissions.filter(sub => sub.authorId === this.currentUser.id);
             },
             
-            // 获取分类颜色
-            getCategoryColor(category) {
-                return this.categories[category]?.color || 'primary';
+            // 获取待审核的内容
+            getPendingSubmissions: function() {
+                return this.submissions.filter(sub => sub.status === 'pending');
             },
             
-            // 审核投稿
-            reviewSubmission(submissionId, approve, anonymous, note) {
-                const submission = this.submissions.find(s => s.id === submissionId);
+            // 获取已通过的内容
+            getApprovedSubmissions: function() {
+                return this.submissions.filter(sub => sub.status === 'approved');
+            },
+            
+            // 获取已拒绝的内容
+            getRejectedSubmissions: function() {
+                return this.submissions.filter(sub => sub.status === 'rejected');
+            },
+            
+            // 审核内容
+            reviewSubmission: function(submissionId, status, note = '') {
+                const submission = this.submissions.find(sub => sub.id === submissionId);
                 if (!submission) {
                     return { success: false, message: '内容不存在' };
                 }
                 
-                submission.status = approve ? this.submissionStatus.APPROVED : this.submissionStatus.REJECTED;
-                submission.anonymous = anonymous;
+                submission.status = status;
                 submission.reviewNote = note;
-                submission.reviewTime = new Date().toISOString();
-                
+                submission.approvedAt = new Date().toISOString();
                 this.saveToLocalStorage();
-                return { success: true, submission };
+                
+                return { success: true, submission: submission };
             },
             
-            // 更新用户资料
-            updateProfile(profileData) {
-                if (!this.currentUser) {
-                    return { success: false, message: '请先登录' };
-                }
-                
-                const userIndex = this.users.findIndex(u => u.id === this.currentUser.id);
-                if (userIndex !== -1) {
-                    this.users[userIndex].name = profileData.name || this.users[userIndex].name;
-                    this.users[userIndex].bio = profileData.bio || this.users[userIndex].bio;
+            // 更新用户资料 - 重点修复头像更新功能
+            updateProfile: function(userData) {
+                try {
+                    if (!this.currentUser) {
+                        return { success: false, message: '请先登录' };
+                    }
                     
-                    // 更新当前用户信息
-                    this.currentUser = { ...this.currentUser, ...this.users[userIndex] };
+                    const userIndex = this.users.findIndex(u => u.id === this.currentUser.id);
+                    if (userIndex === -1) {
+                        return { success: false, message: '用户不存在' };
+                    }
+                    
+                    // 更新姓名
+                    if (userData.name) {
+                        this.users[userIndex].name = userData.name.trim();
+                    }
+                    
+                    // 更新简介
+                    if (userData.bio !== undefined) {
+                        this.users[userIndex].bio = userData.bio.trim();
+                    }
+                    
+                    // 更新密码
+                    if (userData.password && userData.password.length >= 6) {
+                        this.users[userIndex].password = userData.password;
+                    }
+                    
+                    // 更新头像 - 允许所有用户更新头像
+                    if (userData.avatar) {
+                        this.users[userIndex].avatar = userData.avatar;
+                    }
+                    
+                    // 更新当前用户
+                    this.currentUser = { ...this.users[userIndex] };
                     this.saveToLocalStorage();
                     
                     return { success: true, user: this.currentUser };
+                } catch (error) {
+                    console.error('更新资料出错:', error);
+                    return { success: false, message: '更新资料时出现错误，请重试' };
                 }
-                
-                return { success: false, message: '用户不存在' };
-            },
-            
-            // 获取用户的投稿
-            getUserSubmissions(userId) {
-                return this.submissions.filter(s => s.authorId === userId);
-            },
-            
-            // 获取待审核的投稿
-            getPendingSubmissions() {
-                return this.submissions.filter(s => s.status === this.submissionStatus.PENDING);
-            },
-            
-            // 获取已通过的投稿
-            getApprovedSubmissions() {
-                return this.submissions.filter(s => s.status === this.submissionStatus.APPROVED);
-            },
-            
-            // 获取已拒绝的投稿
-            getRejectedSubmissions() {
-                return this.submissions.filter(s => s.status === this.submissionStatus.REJECTED);
-            }
-        };
-
-        // 工具函数
-        const Utils = {
-            // 格式化日期
-            formatDate(dateString) {
-                const date = new Date(dateString);
-                return date.toLocaleString('zh-CN', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-            },
-            
-            // 格式化手机号（中间四位隐藏）
-            formatPhone(phone) {
-                if (!phone) return '';
-                return phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1****$3');
-            },
-            
-            // 显示通知
-            showNotification(message, isError = false) {
-                const notification = document.getElementById('notification');
-                const notificationIcon = document.getElementById('notificationIcon');
-                const notificationMessage = document.getElementById('notificationMessage');
-                
-                notificationMessage.textContent = message;
-                
-                if (isError) {
-                    notificationIcon.className = 'fa fa-exclamation-circle mr-3 text-red-400';
-                } else {
-                    notificationIcon.className = 'fa fa-check-circle mr-3 text-green-400';
-                }
-                
-                notification.classList.remove('translate-y-20', 'opacity-0');
-                notification.classList.add('translate-y-0', 'opacity-100');
-                
-                setTimeout(() => {
-                    notification.classList.remove('translate-y-0', 'opacity-100');
-                    notification.classList.add('translate-y-20', 'opacity-0');
-                }, 3000);
-            },
-            
-            // 显示模态框
-            showModal(modalId) {
-                const modal = document.getElementById(modalId);
-                const modalContent = document.getElementById(modalId === 'loginModal' ? 'modalContent' : 
-                                    modalId === 'registerModal' ? 'registerModalContent' : 'reviewModalContent');
-                
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modalContent.classList.remove('scale-95', 'opacity-0');
-                    modalContent.classList.add('scale-100', 'opacity-100');
-                }, 10);
-                
-                // 阻止背景滚动
-                document.body.style.overflow = 'hidden';
-            },
-            
-            // 隐藏模态框
-            hideModal(modalId) {
-                const modal = document.getElementById(modalId);
-                const modalContent = document.getElementById(modalId === 'loginModal' ? 'modalContent' : 
-                                    modalId === 'registerModal' ? 'registerModalContent' : 'reviewModalContent');
-                
-                modalContent.classList.remove('scale-100', 'opacity-100');
-                modalContent.classList.add('scale-95', 'opacity-0');
-                
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    // 恢复背景滚动
-                    document.body.style.overflow = '';
-                }, 300);
-            },
-            
-            // 清空表单
-            clearForm(formId) {
-                const form = document.getElementById(formId);
-                if (form) {
-                    form.reset();
-                }
-            },
-            
-            // 平滑滚动到锚点
-            scrollToAnchor(anchorId) {
-                const element = document.getElementById(anchorId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // 关闭移动菜单
-                    document.getElementById('mobileMenu').classList.add('hidden');
-                }
-            },
-            
-            // 图片转Base64
-            imageToBase64(file, callback) {
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    callback(reader.result);
-                };
-                reader.readAsDataURL(file);
-            },
-            
-            // 限制图片大小
-            isImageSizeValid(file, maxSizeMB = 5) {
-                const maxSizeBytes = maxSizeMB * 1024 * 1024;
-                return file.size <= maxSizeBytes;
-            },
-            
-            // 检查图片类型
-            isImageTypeValid(file) {
-                const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
-                return validTypes.includes(file.type);
             }
         };
 
         // 视图控制器
         const ViewController = {
-            // 初始化页面
-            init() {
-                // 从本地存储加载数据
-                AppData.loadFromLocalStorage();
-                
-                // 初始化导航栏滚动效果
-                this.initNavbarScroll();
-                
-                // 初始化事件监听
-                this.initEventListeners();
-                
-                // 初始化图片上传功能
-                this.initImageUpload();
-                
-                // 更新页面状态
-                this.updatePageState();
-                
-                // 加载帖子
-                this.loadPosts();
-            },
-            
-            // 初始化导航栏滚动效果
-            initNavbarScroll() {
-                const navbar = document.getElementById('navbar');
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 50) {
-                        navbar.classList.add('py-2', 'shadow');
-                        navbar.classList.remove('py-3');
-                    } else {
-                        navbar.classList.add('py-3');
-                        navbar.classList.remove('py-2', 'shadow');
-                    }
-                });
-            },
-            
-            // 初始化图片上传功能
-            initImageUpload() {
-                const imageUpload = document.getElementById('imageUpload');
-                const previewContainer = document.getElementById('imagePreviewContainer');
-                const submissionForm = document.getElementById('submissionForm');
-                
-                // 存储上传的图片
-                let uploadedImages = [];
-                
-                // 监听文件上传
-                imageUpload.addEventListener('change', (e) => {
-                    const files = e.target.files;
-                    if (!files || files.length === 0) return;
-                    
-                    // 处理每个文件
-                    Array.from(files).forEach(file => {
-                        // 验证图片类型
-                        if (!Utils.isImageTypeValid(file)) {
-                            Utils.showNotification('请上传JPG、PNG或GIF格式的图片', true);
-                            return;
-                        }
-                        
-                        // 验证图片大小
-                        if (!Utils.isImageSizeValid(file)) {
-                            Utils.showNotification('图片大小不能超过5MB', true);
-                            return;
-                        }
-                        
-                        // 转换为base64并显示预览
-                        Utils.imageToBase64(file, (base64) => {
-                            uploadedImages.push(base64);
-                            this.addImagePreview(previewContainer, base64, uploadedImages.length - 1, (index) => {
-                                // 移除图片
-                                uploadedImages.splice(index, 1);
-                            });
-                        });
-                    });
-                    
-                    // 清空input值，允许重复选择同一文件
-                    imageUpload.value = '';
-                });
-                
-                // 处理拖放功能
-                const dropArea = imageUpload.parentElement;
-                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                    dropArea.addEventListener(eventName, this.preventDefaults, false);
-                });
-                
-                function highlight() {
-                    dropArea.classList.add('border-primary');
-                }
-                
-                function unhighlight() {
-                    dropArea.classList.remove('border-primary');
-                }
-                
-                ['dragenter', 'dragover'].forEach(eventName => {
-                    dropArea.addEventListener(eventName, highlight, false);
-                });
-                
-                ['dragleave', 'drop'].forEach(eventName => {
-                    dropArea.addEventListener(eventName, unhighlight, false);
-                });
-                
-                dropArea.addEventListener('drop', (e) => {
-                    const dt = e.dataTransfer;
-                    const files = dt.files;
-                    
-                    if (files && files.length > 0) {
-                        imageUpload.files = files;
-                        // 触发change事件
-                        const event = new Event('change');
-                        imageUpload.dispatchEvent(event);
-                    }
-                }, false);
-                
-                // 表单提交时处理图片
-                submissionForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    
-                    const title = document.getElementById('submissionTitle').value;
-                    const category = document.getElementById('submissionCategory').value;
-                    const content = document.getElementById('submissionContent').value;
-                    const anonymousRequest = document.getElementById('anonymousRequest').checked;
-                    
-                    // 包含图片数据
-                    const result = AppData.submitSubmission({ 
-                        title, 
-                        category, 
-                        content, 
-                        anonymousRequest,
-                        images: uploadedImages // 传递图片的base64数组
-                    });
-                    
-                    if (result.success) {
-                        document.getElementById('submissionForm').classList.add('hidden');
-                        document.getElementById('submissionSuccess').classList.remove('hidden');
-                        Utils.clearForm('submissionForm');
-                        // 清空图片预览和存储
-                        previewContainer.innerHTML = '';
-                        uploadedImages = [];
-                        this.loadUserSubmissions(); // 更新我的投稿列表
-                        this.loadPendingSubmissions(); // 更新待审核列表
-                        Utils.showNotification('发布成功，等待审核');
-                    } else {
-                        Utils.showNotification(result.message, true);
-                    }
-                });
-                
-                // 再发布一条按钮
-                document.getElementById('submitAnotherBtn').addEventListener('click', () => {
-                    document.getElementById('submissionSuccess').classList.add('hidden');
-                    document.getElementById('submissionForm').classList.remove('hidden');
-                    // 清空图片预览和存储
-                    previewContainer.innerHTML = '';
-                    uploadedImages = [];
-                });
-            },
-            
-            // 添加图片预览
-            addImagePreview(container, imageData, index, removeCallback) {
-                const preview = document.createElement('div');
-                preview.className = 'image-preview';
-                preview.innerHTML = `
-                    <img src="${imageData}" alt="预览图">
-                    <div class="remove-image" data-index="${index}">×</div>
-                `;
-                
-                container.appendChild(preview);
-                
-                // 添加删除事件
-                preview.querySelector('.remove-image').addEventListener('click', () => {
-                    container.removeChild(preview);
-                    if (removeCallback) {
-                        removeCallback(index);
-                    }
-                });
-            },
-            
-            // 阻止默认拖放行为
-            preventsDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            },
-            
-            // 初始化事件监听
-            initEventListeners() {
-                // 导航链接点击事件
-                document.querySelectorAll('a[href^="#"]').forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const anchorId = link.getAttribute('href').substring(1);
-                        if (anchorId) {
-                            Utils.scrollToAnchor(anchorId);
-                        }
-                    });
-                });
-                
-                // 移动端菜单按钮
-                document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-                    const mobileMenu = document.getElementById('mobileMenu');
-                    mobileMenu.classList.toggle('hidden');
-                });
-                
-                // 用户下拉菜单
-                document.getElementById('userBtn').addEventListener('click', () => {
-                    const dropdownMenu = document.getElementById('dropdownMenu');
-                    dropdownMenu.classList.toggle('hidden');
-                });
-                
-                // 点击其他地方关闭下拉菜单
-                document.addEventListener('click', (e) => {
-                    const userBtn = document.getElementById('userBtn');
-                    const dropdownMenu = document.getElementById('dropdownMenu');
-                    
-                    if (!userBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-                        dropdownMenu.classList.add('hidden');
-                    }
-                });
-                
-                // 登录按钮
-                document.getElementById('loginBtn').addEventListener('click', () => {
-                    Utils.showModal('loginModal');
-                });
-                document.getElementById('mobileLoginBtn').addEventListener('click', () => {
-                    Utils.showModal('loginModal');
-                });
-                document.getElementById('submitLoginBtn').addEventListener('click', () => {
-                    Utils.showModal('loginModal');
-                });
-                document.getElementById('submissionsLoginBtn').addEventListener('click', () => {
-                    Utils.showModal('loginModal');
-                });
-                document.getElementById('adminLoginBtn').addEventListener('click', () => {
-                    Utils.showModal('loginModal');
-                });
-                document.getElementById('profileLoginBtn').addEventListener('click', () => {
-                    Utils.showModal('loginModal');
-                });
-                
-                // 注册按钮
-                document.getElementById('registerBtn').addEventListener('click', () => {
-                    Utils.showModal('registerModal');
-                });
-                document.getElementById('mobileRegisterBtn').addEventListener('click', () => {
-                    Utils.showModal('registerModal');
-                });
-                
-                // 关闭登录模态框
-                document.getElementById('closeLoginModal').addEventListener('click', () => {
-                    Utils.hideModal('loginModal');
-                });
-                
-                // 关闭注册模态框
-                document.getElementById('closeRegisterModal').addEventListener('click', () => {
-                    Utils.hideModal('registerModal');
-                });
-                
-                // 切换到注册
-                document.getElementById('switchToRegister').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    Utils.hideModal('loginModal');
-                    setTimeout(() => {
-                        Utils.showModal('registerModal');
-                    }, 300);
-                });
-                
-                // 切换到登录
-                document.getElementById('switchToLogin').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    Utils.hideModal('registerModal');
-                    setTimeout(() => {
-                        Utils.showModal('loginModal');
-                    }, 300);
-                });
-                
-                // 登录表单提交
-                document.getElementById('loginForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const phone = document.getElementById('loginPhone').value;
-                    const password = document.getElementById('loginPassword').value;
-                    
-                    const result = AppData.login(phone, password);
-                    if (result.success) {
-                        Utils.hideModal('loginModal');
-                        Utils.clearForm('loginForm');
-                        this.updatePageState();
-                        Utils.showNotification('登录成功');
-                    } else {
-                        Utils.showNotification(result.message, true);
-                    }
-                });
-                
-                // 注册表单提交
-                document.getElementById('registerForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const phone = document.getElementById('registerPhone').value;
-                    const name = document.getElementById('registerName').value;
-                    const password = document.getElementById('registerPassword').value;
-                    const confirmPassword = document.getElementById('registerConfirmPassword').value;
-                    
-                    if (password !== confirmPassword) {
-                        Utils.showNotification('两次输入的密码不一致', true);
-                        return;
-                    }
-                    
-                    const result = AppData.register({ phone, name, password });
-                    if (result.success) {
-                        Utils.hideModal('registerModal');
-                        Utils.clearForm('registerForm');
-                        this.updatePageState();
-                        Utils.showNotification('注册成功');
-                    } else {
-                        Utils.showNotification(result.message, true);
-                    }
-                });
-                
-                // 登出按钮
-                document.getElementById('logoutBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    AppData.logout();
+            // 初始化视图
+            init: function() {
+                try {
                     this.updatePageState();
-                    Utils.showNotification('已成功登出');
-                });
-                document.getElementById('mobileLogoutBtn').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    AppData.logout();
-                    this.updatePageState();
-                    document.getElementById('mobileMenu').classList.add('hidden');
-                    Utils.showNotification('已成功登出');
-                });
-                
-                // 加载更多帖子
-                document.getElementById('loadMoreBtn').addEventListener('click', () => {
-                    // 这里只是模拟加载更多
-                    Utils.showNotification('已加载全部内容');
-                });
-                
-                // 板块切换按钮
-                document.getElementById('allPostsBtn').addEventListener('click', () => {
-                    this.switchForumTab('all');
-                });
-                document.getElementById('confessionBtn').addEventListener('click', () => {
-                    this.switchForumTab('confession');
-                });
-                document.getElementById('complaintBtn').addEventListener('click', () => {
-                    this.switchForumTab('complaint');
-                });
-                document.getElementById('questionBtn').addEventListener('click', () => {
-                    this.switchForumTab('question');
-                });
-                
-                // 审核标签切换
-                document.getElementById('pendingReviewsBtn').addEventListener('click', () => {
-                    this.switchReviewTab('pending');
-                });
-                document.getElementById('approvedBtn').addEventListener('click', () => {
-                    this.switchReviewTab('approved');
-                });
-                document.getElementById('rejectedBtn').addEventListener('click', () => {
-                    this.switchReviewTab('rejected');
-                });
-                
-                // 关闭审核模态框
-                document.getElementById('closeReviewModal').addEventListener('click', () => {
-                    Utils.hideModal('reviewModal');
-                });
-                
-                // 通过并发布按钮
-                document.getElementById('approveSubmission').addEventListener('click', () => {
-                    const submissionId = document.getElementById('reviewModal').dataset.submissionId;
-                    const anonymous = document.getElementById('reviewAnonymous').checked;
-                    const note = document.getElementById('reviewNote').value;
-                    
-                    const result = AppData.reviewSubmission(submissionId, true, anonymous, note);
-                    if (result.success) {
-                        Utils.hideModal('reviewModal');
-                        this.loadPendingSubmissions();
-                        this.loadApprovedSubmissions();
-                        this.loadPosts();
-                        this.loadUserSubmissions();
-                        Utils.showNotification('已通过并发布');
-                    } else {
-                        Utils.showNotification(result.message, true);
-                    }
-                });
-                
-                // 拒绝按钮
-                document.getElementById('rejectSubmission').addEventListener('click', () => {
-                    const submissionId = document.getElementById('reviewModal').dataset.submissionId;
-                    const note = document.getElementById('reviewNote').value;
-                    
-                    const result = AppData.reviewSubmission(submissionId, false, false, note);
-                    if (result.success) {
-                        Utils.hideModal('reviewModal');
-                        this.loadPendingSubmissions();
-                        this.loadRejectedSubmissions();
-                        this.loadUserSubmissions();
-                        Utils.showNotification('已拒绝该内容');
-                    } else {
-                        Utils.showNotification(result.message, true);
-                    }
-                });
-                
-                // 个人资料表单提交
-                document.getElementById('profileForm').addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const name = document.getElementById('profileName').value;
-                    const bio = document.getElementById('profileBio').value;
-                    
-                    const result = AppData.updateProfile({ name, bio });
-                    if (result.success) {
-                        this.updateProfileView();
-                        this.updateUserDisplay();
-                        Utils.showNotification('资料更新成功');
-                    } else {
-                        Utils.showNotification(result.message, true);
-                    }
-                });
-            },
-            
-            // 切换论坛板块
-            switchForumTab(tab) {
-                const allBtn = document.getElementById('allPostsBtn');
-                const confessionBtn = document.getElementById('confessionBtn');
-                const complaintBtn = document.getElementById('complaintBtn');
-                const questionBtn = document.getElementById('questionBtn');
-                
-                // 重置所有按钮样式
-                allBtn.className = 'px-6 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm flex items-center hover:border-primary hover:text-primary transition-colors';
-                confessionBtn.className = 'px-6 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm flex items-center hover:border-confession hover:text-confession transition-colors';
-                complaintBtn.className = 'px-6 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm flex items-center hover:border-complaint hover:text-complaint transition-colors';
-                questionBtn.className = 'px-6 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm flex items-center hover:border-question hover:text-question transition-colors';
-                
-                // 设置选中按钮样式
-                if (tab === 'all') {
-                    allBtn.className = 'px-6 py-2 rounded-full bg-primary text-white text-sm flex items-center';
-                } else if (tab === 'confession') {
-                    confessionBtn.className = 'px-6 py-2 rounded-full bg-confession text-white text-sm flex items-center';
-                } else if (tab === 'complaint') {
-                    complaintBtn.className = 'px-6 py-2 rounded-full bg-complaint text-white text-sm flex items-center';
-                } else if (tab === 'question') {
-                    questionBtn.className = 'px-6 py-2 rounded-full bg-question text-white text-sm flex items-center';
+                    this.bindEvents();
+                    this.renderPosts();
+                } catch (error) {
+                    console.error('初始化视图出错:', error);
+                    Utils.showNotification('页面加载出错，请刷新重试', true);
                 }
-                
-                // 加载对应板块的帖子
-                this.loadPosts(tab);
             },
             
             // 更新页面状态
-            updatePageState() {
-                const currentUser = AppData.currentUser;
-                
-                // 更新用户显示
-                this.updateUserDisplay();
-                
-                // 更新投稿区域
-                this.updateSubmissionArea();
-                
-                // 更新我的投稿区域
-                this.updateMySubmissionsArea();
-                
-                // 更新审核面板
-                this.updateAdminPanel();
-                
-                // 更新个人资料区域
-                this.updateProfileArea();
-            },
-            
-            // 更新用户显示
-            updateUserDisplay() {
-                const currentUser = AppData.currentUser;
-                const loginBtn = document.getElementById('loginBtn');
-                const registerBtn = document.getElementById('registerBtn');
-                const userDropdown = document.getElementById('userDropdown');
-                const usernameDisplay = document.getElementById('usernameDisplay');
-                const mobileLoginBtn = document.getElementById('mobileLoginBtn');
-                const mobileRegisterBtn = document.getElementById('mobileRegisterBtn');
-                const mobileUserMenu = document.getElementById('mobileUserMenu');
-                const mobileUsername = document.getElementById('mobileUsername');
-                const adminLink = document.getElementById('adminLink');
-                const mobileAdminLink = document.getElementById('mobileAdminLink');
-                
-                if (currentUser) {
-                    // 显示用户菜单
-                    loginBtn.classList.add('hidden');
-                    registerBtn.classList.add('hidden');
-                    userDropdown.classList.remove('hidden');
-                    usernameDisplay.textContent = currentUser.name;
+            updatePageState: function() {
+                try {
+                    const currentUser = AppData.currentUser;
                     
-                    mobileLoginBtn.classList.add('hidden');
-                    mobileRegisterBtn.classList.add('hidden');
-                    mobileUserMenu.classList.remove('hidden');
-                    mobileUsername.textContent = currentUser.name;
+                    // 更新导航栏用户菜单
+                    const loginBtn = document.getElementById('loginBtn');
+                    const registerBtn = document.getElementById('registerBtn');
+                    const userDropdown = document.getElementById('userDropdown');
+                    const usernameDisplay = document.getElementById('usernameDisplay');
+                    const desktopAvatar = document.getElementById('desktopAvatar');
                     
-                    // 显示管理员链接（如果是管理员）
-                    if (currentUser.isAdmin) {
-                        adminLink.classList.remove('hidden');
-                        mobileAdminLink.classList.remove('hidden');
+                    // 移动端用户菜单
+                    const mobileLoginBtn = document.getElementById('mobileLoginBtn');
+                    const mobileRegisterBtn = document.getElementById('mobileRegisterBtn');
+                    const mobileUserMenu = document.getElementById('mobileUserMenu');
+                    const mobileUsername = document.getElementById('mobileUsername');
+                    const mobileAvatar = document.getElementById('mobileAvatar');
+                    
+                    // 审核管理链接
+                    const adminLink = document.getElementById('adminLink');
+                    const mobileAdminLink = document.getElementById('mobileAdminLink');
+                    
+                    // 发布内容区域的登录提示
+                    const loginPrompt = document.getElementById('loginPrompt');
+                    const submissionForm = document.getElementById('submissionForm');
+                    
+                    // 我的发布区域的登录提示
+                    const submissionsLoginPrompt = document.getElementById('submissionsLoginPrompt');
+                    const mySubmissionsContainer = document.getElementById('mySubmissionsContainer');
+                    
+                    // 个人资料区域的登录提示
+                    const profileLoginPrompt = document.getElementById('profileLoginPrompt');
+                    const profileContainer = document.getElementById('profileContainer');
+                    
+                    if (currentUser) {
+                        // 用户已登录
+                        loginBtn.classList.add('hidden');
+                        registerBtn.classList.add('hidden');
+                        userDropdown.classList.remove('hidden');
+                        usernameDisplay.textContent = currentUser.name;
+                        // 显示用户头像
+                        desktopAvatar.src = currentUser.avatar || 'https://picsum.photos/id/64/40/40';
+                        desktopAvatar.alt = currentUser.name + '的头像';
+                        
+                        mobileLoginBtn.classList.add('hidden');
+                        mobileRegisterBtn.classList.add('hidden');
+                        mobileUserMenu.classList.remove('hidden');
+                        mobileUsername.textContent = currentUser.name;
+                        mobileAvatar.src = currentUser.avatar || 'https://picsum.photos/id/64/40/40';
+                        mobileAvatar.alt = currentUser.name + '的头像';
+                        
+                        // 显示审核管理链接（如果是管理员）
+                        if (currentUser.isAdmin) {
+                            adminLink.classList.remove('hidden');
+                            mobileAdminLink.classList.remove('hidden');
+                        } else {
+                            adminLink.classList.add('hidden');
+                            mobileAdminLink.classList.add('hidden');
+                        }
+                        
+                        // 显示发布表单
+                        loginPrompt.classList.add('hidden');
+                        submissionForm.classList.remove('hidden');
+                        
+                        // 显示我的发布
+                        submissionsLoginPrompt.classList.add('hidden');
+                        mySubmissionsContainer.classList.remove('hidden');
+                        this.renderUserSubmissions();
+                        
+                        // 显示个人资料
+                        profileLoginPrompt.classList.add('hidden');
+                        profileContainer.classList.remove('hidden');
+                        this.renderProfile();
+                        
                     } else {
+                        // 用户未登录
+                        loginBtn.classList.remove('hidden');
+                        registerBtn.classList.remove('hidden');
+                        userDropdown.classList.add('hidden');
+                        
+                        mobileLoginBtn.classList.remove('hidden');
+                        mobileRegisterBtn.classList.remove('hidden');
+                        mobileUserMenu.classList.add('hidden');
+                        
+                        // 隐藏审核管理链接
                         adminLink.classList.add('hidden');
                         mobileAdminLink.classList.add('hidden');
+                        
+                        // 显示登录提示
+                        loginPrompt.classList.remove('hidden');
+                        submissionForm.classList.add('hidden');
+                        
+                        // 显示我的发布登录提示
+                        submissionsLoginPrompt.classList.remove('hidden');
+                        mySubmissionsContainer.classList.add('hidden');
+                        
+                        // 显示个人资料登录提示
+                        profileLoginPrompt.classList.remove('hidden');
+                        profileContainer.classList.add('hidden');
                     }
-                } else {
-                    // 显示登录/注册按钮
-                    loginBtn.classList.remove('hidden');
-                    registerBtn.classList.remove('hidden');
-                    userDropdown.classList.add('hidden');
                     
-                    mobileLoginBtn.classList.remove('hidden');
-                    mobileRegisterBtn.classList.remove('hidden');
-                    mobileUserMenu.classList.add('hidden');
+                    // 更新审核面板显示状态
+                    this.updateAdminPanel();
                     
-                    adminLink.classList.add('hidden');
-                    mobileAdminLink.classList.add('hidden');
+                    // 高亮当前页面链接
+                    this.highlightCurrentPage();
+                } catch (error) {
+                    console.error('更新页面状态出错:', error);
                 }
             },
             
-            // 更新投稿区域
-            updateSubmissionArea() {
-                const currentUser = AppData.currentUser;
-                const loginPrompt = document.getElementById('loginPrompt');
-                const submissionForm = document.getElementById('submissionForm');
-                const submissionSuccess = document.getElementById('submissionSuccess');
-                
-                if (currentUser) {
-                    loginPrompt.classList.add('hidden');
-                    submissionForm.classList.remove('hidden');
-                    submissionSuccess.classList.add('hidden');
-                } else {
-                    loginPrompt.classList.remove('hidden');
-                    submissionForm.classList.add('hidden');
-                    submissionSuccess.classList.add('hidden');
-                }
-            },
-            
-            // 更新我的投稿区域
-            updateMySubmissionsArea() {
-                const currentUser = AppData.currentUser;
-                const submissionsLoginPrompt = document.getElementById('submissionsLoginPrompt');
-                const mySubmissionsContainer = document.getElementById('mySubmissionsContainer');
-                
-                if (currentUser) {
-                    submissionsLoginPrompt.classList.add('hidden');
-                    mySubmissionsContainer.classList.remove('hidden');
-                    this.loadUserSubmissions();
-                } else {
-                    submissionsLoginPrompt.classList.remove('hidden');
-                    mySubmissionsContainer.classList.add('hidden');
-                }
-            },
-            
-            // 加载用户投稿
-            loadUserSubmissions() {
-                const currentUser = AppData.currentUser;
-                if (!currentUser) return;
-                
-                const submissions = AppData.getUserSubmissions(currentUser.id);
-                const mySubmissionsContainer = document.getElementById('mySubmissionsContainer');
-                const noSubmissions = document.getElementById('noSubmissions');
-                
-                // 清空容器
-                while (mySubmissionsContainer.firstChild) {
-                    if (mySubmissionsContainer.firstChild.id !== 'noSubmissions') {
-                        mySubmissionsContainer.removeChild(mySubmissionsContainer.firstChild);
+            // 更新审核面板 - 修复无法进入的bug
+            updateAdminPanel: function() {
+                try {
+                    const currentUser = AppData.currentUser;
+                    const adminLoginPrompt = document.getElementById('adminLoginPrompt');
+                    const adminPanelContainer = document.getElementById('adminPanelContainer');
+                    
+                    // 明确检查管理员身份，增加容错处理
+                    const isAdmin = currentUser && typeof currentUser.isAdmin === 'boolean' && currentUser.isAdmin;
+                    
+                    if (isAdmin) {
+                        adminLoginPrompt.classList.add('hidden');
+                        adminPanelContainer.classList.remove('hidden');
+                        this.loadPendingSubmissions();
                     } else {
-                        break;
+                        adminLoginPrompt.classList.remove('hidden');
+                        adminPanelContainer.classList.add('hidden');
                     }
+                } catch (error) {
+                    console.error('更新审核面板出错:', error);
                 }
-                
-                if (submissions.length === 0) {
-                    noSubmissions.classList.remove('hidden');
-                    return;
-                }
-                
-                noSubmissions.classList.add('hidden');
-                
-                // 添加投稿
-                submissions.forEach(submission => {
-                    let statusBadge = '';
-                    if (submission.status === AppData.submissionStatus.PENDING) {
-                        statusBadge = '<span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">待审核</span>';
-                    } else if (submission.status === AppData.submissionStatus.APPROVED) {
-                        statusBadge = '<span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">已通过</span>';
-                    } else {
-                        statusBadge = '<span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">已拒绝</span>';
+            },
+            
+            // 加载待审核内容
+            loadPendingSubmissions: function() {
+                try {
+                    const submissions = AppData.getPendingSubmissions();
+                    const container = document.getElementById('pendingReviewsContainer');
+                    const noPendingReviews = document.getElementById('noPendingReviews');
+                    
+                    container.innerHTML = '';
+                    
+                    if (submissions.length === 0) {
+                        noPendingReviews.classList.remove('hidden');
+                        return;
                     }
                     
-                    // 处理图片预览
-                    let imagesHtml = '';
-                    if (submission.images && submission.images.length > 0) {
-                        imagesHtml = '<div class="image-preview-container my-4">';
-                        submission.images.slice(0, 3).forEach(img => {
-                            imagesHtml += `<div class="image-preview"><img src="${img}" alt="发布图片"></div>`;
-                        });
-                        if (submission.images.length > 3) {
-                            imagesHtml += `<div class="image-preview bg-gray-100 flex items-center justify-center text-gray-500">
-                                +${submission.images.length - 3}
-                            </div>`;
+                    noPendingReviews.classList.add('hidden');
+                    
+                    submissions.forEach(submission => {
+                        const categoryClass = submission.category === 'confession' ? 'bg-confession' : 
+                                             submission.category === 'complaint' ? 'bg-complaint' : 'bg-question';
+                        
+                        const categoryText = submission.category === 'confession' ? '表白墙' : 
+                                            submission.category === 'complaint' ? '吐槽区' : '提问区';
+                        
+                        let imagesHtml = '';
+                        if (submission.images && submission.images.length > 0) {
+                            imagesHtml = `
+                                <div class="grid grid-cols-3 gap-2 mt-3">
+                                    ${submission.images.map(img => `
+                                        <div class="aspect-square bg-gray-100 rounded-md overflow-hidden">
+                                            <img src="${img}" alt="发布图片" class="w-full h-full object-cover">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `;
                         }
-                        imagesHtml += '</div>';
-                    }
-                    
-                    const categoryColor = AppData.getCategoryColor(submission.category);
-                    const categoryName = AppData.getCategoryName(submission.category);
-                    
-                    const submissionElement = document.createElement('div');
-                    submissionElement.className = 'bg-white rounded-xl shadow-sm p-6 card-hover';
-                    submissionElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-lg font-semibold hover:text-primary transition-colors">${submission.title}</h3>
-                            ${statusBadge}
-                        </div>
-                        <p class="text-neutral text-sm mb-4 line-clamp-2">${submission.content}</p>
-                        ${imagesHtml}
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-${categoryColor}/10 text-${categoryColor} text-xs px-2 py-1 rounded-full">${categoryName}</span>
-                            ${submission.anonymousRequest ? '<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">已申请匿名</span>' : ''}
-                            ${submission.anonymous ? '<span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">已匿名发布</span>' : ''}
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-gray-500">
-                            <span>发布时间: ${Utils.formatDate(submission.submitTime)}</span>
-                            ${submission.reviewTime ? `<span>审核时间: ${Utils.formatDate(submission.reviewTime)}</span>` : ''}
-                        </div>
-                        ${submission.reviewNote ? `
+                        
+                        const submissionElement = document.createElement('div');
+                        submissionElement.className = 'bg-white rounded-xl shadow-sm p-6';
+                        submissionElement.innerHTML = `
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <span class="section-indicator ${categoryClass}"></span>
+                                    <span class="text-sm font-medium">${categoryText}</span>
+                                </div>
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">待审核</span>
+                            </div>
+                            
+                            <h3 class="text-lg font-bold mb-3">${submission.title}</h3>
+                            
+                            <div class="text-gray-700 mb-4">${submission.content}</div>
+                            
+                            ${imagesHtml}
+                            
                             <div class="mt-4 pt-4 border-t border-gray-100">
-                                <p class="text-sm"><span class="font-medium">审核备注:</span> ${submission.reviewNote}</p>
+                                <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
+                                    <div>
+                                        作者: ${submission.authorName} (${submission.authorPhone})
+                                    </div>
+                                    <div>
+                                        提交时间: ${Utils.formatDate(submission.createdAt)}
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="reviewNote-${submission.id}" class="block text-sm font-medium mb-2">审核备注（可选）</label>
+                                    <textarea id="reviewNote-${submission.id}" rows="2" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-colors resize-none" placeholder="请输入审核备注..."></textarea>
+                                </div>
+                                
+                                <div class="flex justify-end gap-3">
+                                    <button class="reject-btn btn-secondary inline-flex items-center" data-id="${submission.id}">
+                                        <i class="fa fa-times mr-2"></i> 拒绝
+                                    </button>
+                                    <button class="approve-btn btn-primary inline-flex items-center" data-id="${submission.id}">
+                                        <i class="fa fa-check mr-2"></i> 通过并发布
+                                    </button>
+                                </div>
                             </div>
-                        ` : ''}
-                    `;
-                    
-                    mySubmissionsContainer.insertBefore(submissionElement, noSubmissions);
-                });
-            },
-            
-            // 更新审核面板
-            updateAdminPanel() {
-                const currentUser = AppData.currentUser;
-                const adminLoginPrompt = document.getElementById('adminLoginPrompt');
-                const adminPanelContainer = document.getElementById('adminPanelContainer');
-                
-                if (currentUser && currentUser.isAdmin) {
-                    adminLoginPrompt.classList.add('hidden');
-                    adminPanelContainer.classList.remove('hidden');
-                    this.loadPendingSubmissions();
-                    this.loadApprovedSubmissions();
-                    this.loadRejectedSubmissions();
-                } else {
-                    adminLoginPrompt.classList.remove('hidden');
-                    adminPanelContainer.classList.add('hidden');
-                }
-            },
-            
-            // 切换审核标签
-            switchReviewTab(tab) {
-                const pendingBtn = document.getElementById('pendingReviewsBtn');
-                const approvedBtn = document.getElementById('approvedBtn');
-                const rejectedBtn = document.getElementById('rejectedBtn');
-                const pendingSubmissions = document.getElementById('pendingSubmissions');
-                const approvedSubmissions = document.getElementById('approvedSubmissions');
-                const rejectedSubmissions = document.getElementById('rejectedSubmissions');
-                
-                // 重置所有按钮样式
-                pendingBtn.className = 'px-4 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm hover:border-primary hover:text-primary transition-colors';
-                approvedBtn.className = 'px-4 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm hover:border-primary hover:text-primary transition-colors';
-                rejectedBtn.className = 'px-4 py-2 rounded-full bg-white text-dark border border-gray-200 text-sm hover:border-primary hover:text-primary transition-colors';
-                
-                // 隐藏所有内容
-                pendingSubmissions.classList.add('hidden');
-                approvedSubmissions.classList.add('hidden');
-                rejectedSubmissions.classList.add('hidden');
-                
-                // 显示选中的标签
-                if (tab === 'pending') {
-                    pendingBtn.className = 'px-4 py-2 rounded-full bg-primary text-white text-sm';
-                    pendingSubmissions.classList.remove('hidden');
-                } else if (tab === 'approved') {
-                    approvedBtn.className = 'px-4 py-2 rounded-full bg-primary text-white text-sm';
-                    approvedSubmissions.classList.remove('hidden');
-                } else if (tab === 'rejected') {
-                    rejectedBtn.className = 'px-4 py-2 rounded-full bg-primary text-white text-sm';
-                    rejectedSubmissions.classList.remove('hidden');
-                }
-            },
-            
-            // 加载待审核投稿
-            loadPendingSubmissions() {
-                const submissions = AppData.getPendingSubmissions();
-                const pendingSubmissions = document.getElementById('pendingSubmissions');
-                const noPendingSubmissions = document.getElementById('noPendingSubmissions');
-                
-                // 清空容器
-                while (pendingSubmissions.firstChild) {
-                    if (pendingSubmissions.firstChild.id !== 'noPendingSubmissions') {
-                        pendingSubmissions.removeChild(pendingSubmissions.firstChild);
-                    } else {
-                        break;
-                    }
-                }
-                
-                if (submissions.length === 0) {
-                    noPendingSubmissions.classList.remove('hidden');
-                    return;
-                }
-                
-                noPendingSubmissions.classList.add('hidden');
-                
-                // 添加投稿
-                submissions.forEach(submission => {
-                    // 处理图片预览
-                    let imagesHtml = '';
-                    if (submission.images && submission.images.length > 0) {
-                        imagesHtml = '<div class="image-preview-container my-4">';
-                        submission.images.slice(0, 3).forEach(img => {
-                            imagesHtml += `<div class="image-preview"><img src="${img}" alt="发布图片"></div>`;
-                        });
-                        if (submission.images.length > 3) {
-                            imagesHtml += `<div class="image-preview bg-gray-100 flex items-center justify-center text-gray-500">
-                                +${submission.images.length - 3}
-                            </div>`;
-                        }
-                        imagesHtml += '</div>';
-                    }
-                    
-                    const categoryColor = AppData.getCategoryColor(submission.category);
-                    const categoryName = AppData.getCategoryName(submission.category);
-                    
-                    const submissionElement = document.createElement('div');
-                    submissionElement.className = 'bg-white rounded-xl shadow-sm p-6 card-hover';
-                    submissionElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-lg font-semibold">${submission.title}</h3>
-                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">待审核</span>
-                        </div>
-                        <p class="text-neutral text-sm mb-4 line-clamp-2">${submission.content}</p>
-                        ${imagesHtml}
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-${categoryColor}/10 text-${categoryColor} text-xs px-2 py-1 rounded-full">${categoryName}</span>
-                            ${submission.anonymousRequest ? '<span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">已申请匿名</span>' : ''}
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <p class="text-sm text-gray-500">发布人: ${submission.authorName}</p>
-                                <p class="text-sm text-gray-500">手机号: ${Utils.formatPhone(submission.authorPhone)}</p>
-                                <p class="text-sm text-gray-500">发布时间: ${Utils.formatDate(submission.submitTime)}</p>
-                            </div>
-                            <button class="review-btn btn-secondary text-sm" data-id="${submission.id}">
-                                审核
-                            </button>
-                        </div>
-                    `;
-                    
-                    pendingSubmissions.insertBefore(submissionElement, noPendingSubmissions);
-                    
-                    // 添加审核按钮事件
-                    submissionElement.querySelector('.review-btn').addEventListener('click', () => {
-                        this.openReviewModal(submission);
+                        `;
+                        
+                        container.appendChild(submissionElement);
                     });
-                });
-            },
-            
-            // 加载已通过投稿
-            loadApprovedSubmissions() {
-                const submissions = AppData.getApprovedSubmissions();
-                const approvedSubmissions = document.getElementById('approvedSubmissions');
-                
-                // 清空容器
-                approvedSubmissions.innerHTML = '';
-                
-                if (submissions.length === 0) {
-                    approvedSubmissions.innerHTML = `
-                        <div class="py-20 text-center">
-                            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <i class="fa fa-check-circle text-3xl text-gray-400"></i>
-                            </div>
-                            <h3 class="text-xl font-medium mb-2">暂无已通过内容</h3>
-                            <p class="text-neutral">还没有通过审核的内容</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // 添加投稿
-                submissions.forEach(submission => {
-                    // 处理图片预览
-                    let imagesHtml = '';
-                    if (submission.images && submission.images.length > 0) {
-                        imagesHtml = '<div class="image-preview-container my-4">';
-                        submission.images.slice(0, 3).forEach(img => {
-                            imagesHtml += `<div class="image-preview"><img src="${img}" alt="发布图片"></div>`;
+                    
+                    // 绑定审核按钮事件
+                    document.querySelectorAll('.approve-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const submissionId = e.currentTarget.getAttribute('data-id');
+                            const note = document.getElementById(`reviewNote-${submissionId}`).value;
+                            this.handleReview(submissionId, 'approved', note);
                         });
-                        if (submission.images.length > 3) {
-                            imagesHtml += `<div class="image-preview bg-gray-100 flex items-center justify-center text-gray-500">
-                                +${submission.images.length - 3}
-                            </div>`;
-                        }
-                        imagesHtml += '</div>';
-                    }
-                    
-                    const categoryColor = AppData.getCategoryColor(submission.category);
-                    const categoryName = AppData.getCategoryName(submission.category);
-                    
-                    const submissionElement = document.createElement('div');
-                    submissionElement.className = 'bg-white rounded-xl shadow-sm p-6 card-hover';
-                    submissionElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-lg font-semibold">${submission.title}</h3>
-                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">已通过</span>
-                        </div>
-                        <p class="text-neutral text-sm mb-4 line-clamp-2">${submission.content}</p>
-                        ${imagesHtml}
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-${categoryColor}/10 text-${categoryColor} text-xs px-2 py-1 rounded-full">${categoryName}</span>
-                            ${submission.anonymous ? '<span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">已匿名发布</span>' : ''}
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-gray-500">
-                            <div>
-                                <p>发布人: ${submission.authorName}</p>
-                                <p>手机号: ${Utils.formatPhone(submission.authorPhone)}</p>
-                                <p>发布时间: ${Utils.formatDate(submission.submitTime)}</p>
-                            </div>
-                            <p>审核时间: ${Utils.formatDate(submission.reviewTime)}</p>
-                        </div>
-                    `;
-                    
-                    approvedSubmissions.appendChild(submissionElement);
-                });
-            },
-            
-            // 加载已拒绝投稿
-            loadRejectedSubmissions() {
-                const submissions = AppData.getRejectedSubmissions();
-                const rejectedSubmissions = document.getElementById('rejectedSubmissions');
-                
-                // 清空容器
-                rejectedSubmissions.innerHTML = '';
-                
-                if (submissions.length === 0) {
-                    rejectedSubmissions.innerHTML = `
-                        <div class="py-20 text-center">
-                            <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <i class="fa fa-times-circle text-3xl text-gray-400"></i>
-                            </div>
-                            <h3 class="text-xl font-medium mb-2">暂无已拒绝内容</h3>
-                            <p class="text-neutral">还没有被拒绝的内容</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // 添加投稿
-                submissions.forEach(submission => {
-                    // 处理图片预览
-                    let imagesHtml = '';
-                    if (submission.images && submission.images.length > 0) {
-                        imagesHtml = '<div class="image-preview-container my-4">';
-                        submission.images.slice(0, 3).forEach(img => {
-                            imagesHtml += `<div class="image-preview"><img src="${img}" alt="发布图片"></div>`;
-                        });
-                        if (submission.images.length > 3) {
-                            imagesHtml += `<div class="image-preview bg-gray-100 flex items-center justify-center text-gray-500">
-                                +${submission.images.length - 3}
-                            </div>`;
-                        }
-                        imagesHtml += '</div>';
-                    }
-                    
-                    const categoryColor = AppData.getCategoryColor(submission.category);
-                    const categoryName = AppData.getCategoryName(submission.category);
-                    
-                    const submissionElement = document.createElement('div');
-                    submissionElement.className = 'bg-white rounded-xl shadow-sm p-6 card-hover';
-                    submissionElement.innerHTML = `
-                        <div class="flex justify-between items-start mb-4">
-                            <h3 class="text-lg font-semibold">${submission.title}</h3>
-                            <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">已拒绝</span>
-                        </div>
-                        <p class="text-neutral text-sm mb-4 line-clamp-2">${submission.content}</p>
-                        ${imagesHtml}
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="bg-${categoryColor}/10 text-${categoryColor} text-xs px-2 py-1 rounded-full">${categoryName}</span>
-                        </div>
-                        <div class="mb-4">
-                            <p class="text-sm"><span class="font-medium">拒绝原因:</span> ${submission.reviewNote || '未提供原因'}</p>
-                        </div>
-                        <div class="flex justify-between items-center text-sm text-gray-500">
-                            <div>
-                                <p>发布人: ${submission.authorName}</p>
-                                <p>手机号: ${Utils.formatPhone(submission.authorPhone)}</p>
-                                <p>发布时间: ${Utils.formatDate(submission.submitTime)}</p>
-                            </div>
-                            <p>审核时间: ${Utils.formatDate(submission.reviewTime)}</p>
-                        </div>
-                    `;
-                    
-                    rejectedSubmissions.appendChild(submissionElement);
-                });
-            },
-            
-            // 打开审核模态框
-            openReviewModal(submission) {
-                const reviewModal = document.getElementById('reviewModal');
-                const reviewTitle = document.getElementById('reviewTitle');
-                const reviewCategory = document.getElementById('reviewCategory');
-                const reviewBody = document.getElementById('reviewBody');
-                const reviewImages = document.getElementById('reviewImages');
-                const reviewAuthor = document.getElementById('reviewAuthor');
-                const reviewAuthorPhone = document.getElementById('reviewAuthorPhone');
-                const reviewTime = document.getElementById('reviewTime');
-                const reviewAnonymous = document.getElementById('reviewAnonymous');
-                const reviewNote = document.getElementById('reviewNote');
-                
-                // 清空图片预览
-                reviewImages.innerHTML = '';
-                
-                // 设置图片预览
-                if (submission.images && submission.images.length > 0) {
-                    submission.images.forEach(img => {
-                        const imgElement = document.createElement('div');
-                        imgElement.className = 'image-preview';
-                        imgElement.innerHTML = `<img src="${img}" alt="发布图片">`;
-                        reviewImages.appendChild(imgElement);
                     });
-                }
-                
-                // 设置模态框数据
-                reviewModal.dataset.submissionId = submission.id;
-                reviewTitle.textContent = submission.title;
-                
-                const categoryColor = AppData.getCategoryColor(submission.category);
-                const categoryName = AppData.getCategoryName(submission.category);
-                reviewCategory.innerHTML = `<span class="section-indicator bg-${categoryColor}"></span>${categoryName}`;
-                
-                reviewBody.textContent = submission.content;
-                reviewAuthor.textContent = submission.authorName;
-                reviewAuthorPhone.textContent = submission.authorPhone; // 管理员可以看到完整手机号
-                reviewTime.textContent = Utils.formatDate(submission.submitTime);
-                reviewAnonymous.checked = submission.anonymousRequest;
-                reviewNote.value = '';
-                
-                // 显示模态框
-                Utils.showModal('reviewModal');
-            },
-            
-            // 更新个人资料区域
-            updateProfileArea() {
-                const currentUser = AppData.currentUser;
-                const profileLoginPrompt = document.getElementById('profileLoginPrompt');
-                const profileContainer = document.getElementById('profileContainer');
-                
-                if (currentUser) {
-                    profileLoginPrompt.classList.add('hidden');
-                    profileContainer.classList.remove('hidden');
-                    this.updateProfileView();
-                } else {
-                    profileLoginPrompt.classList.remove('hidden');
-                    profileContainer.classList.add('hidden');
-                }
-            },
-            
-            // 更新个人资料视图
-            updateProfileView() {
-                const currentUser = AppData.currentUser;
-                if (!currentUser) return;
-                
-                document.getElementById('profileAvatar').src = currentUser.avatar;
-                document.getElementById('profileUsername').textContent = currentUser.name;
-                document.getElementById('profileJoinDate').textContent = `加入时间: ${currentUser.joinDate}`;
-                document.getElementById('profilePhone').value = currentUser.phone;
-                
-                // 显示管理员身份
-                const profileRole = document.getElementById('profileRole');
-                if (currentUser.isAdmin) {
-                    profileRole.textContent = '身份: 管理员';
-                    profileRole.className = 'text-sm mt-2 text-primary font-medium';
-                    profileRole.classList.remove('hidden');
-                } else {
-                    profileRole.classList.add('hidden');
-                }
-                
-                document.getElementById('profileName').value = currentUser.name;
-                document.getElementById('profileBio').value = currentUser.bio || '';
-            },
-            
-            // 加载帖子
-            loadPosts(categoryFilter = 'all') {
-                let approvedSubmissions = AppData.getApprovedSubmissions();
-                
-                // 根据板块筛选
-                if (categoryFilter !== 'all' && ['confession', 'complaint', 'question'].includes(categoryFilter)) {
-                    approvedSubmissions = approvedSubmissions.filter(s => s.category === categoryFilter);
-                }
-                
-                const postsContainer = document.getElementById('postsContainer');
-                const loadingPosts = document.getElementById('loadingPosts');
-                const noPosts = document.getElementById('noPosts');
-                
-                // 清空容器
-                while (postsContainer.firstChild) {
-                    if (postsContainer.firstChild.id !== 'loadingPosts' && postsContainer.firstChild.id !== 'noPosts') {
-                        postsContainer.removeChild(postsContainer.firstChild);
-                    } else {
-                        break;
-                    }
-                }
-                
-                // 隐藏加载状态，显示内容
-                loadingPosts.classList.add('hidden');
-                
-                if (approvedSubmissions.length === 0) {
-                    noPosts.classList.remove('hidden');
-                    return;
-                }
-                
-                noPosts.classList.add('hidden');
-                
-                // 添加帖子
-                approvedSubmissions.forEach(submission => {
-                    // 处理图片预览
-                    let imagesHtml = '';
-                    if (submission.images && submission.images.length > 0) {
-                        imagesHtml = '<div class="grid grid-cols-2 md:grid-cols-4 gap-3 my-4">';
-                        submission.images.forEach(img => {
-                            imagesHtml += `<div class="aspect-video bg-gray-100 rounded-md overflow-hidden">
-                                <img src="${img}" alt="发布图片" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-                            </div>`;
+                    
+                    document.querySelectorAll('.reject-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const submissionId = e.currentTarget.getAttribute('data-id');
+                            const note = document.getElementById(`reviewNote-${submissionId}`).value;
+                            this.handleReview(submissionId, 'rejected', note);
                         });
-                        imagesHtml += '</div>';
+                    });
+                } catch (error) {
+                    console.error('加载待审核内容出错:', error);
+                    Utils.showNotification('加载审核内容出错，请重试', true);
+                }
+            },
+            
+            // 处理审核
+            handleReview: function(submissionId, status, note) {
+                try {
+                    const result = AppData.reviewSubmission(submissionId, status, note);
+                    if (result.success) {
+                        Utils.showNotification(`内容已${status === 'approved' ? '通过' : '拒绝'}`);
+                        this.loadPendingSubmissions();
+                        this.loadApprovedSubmissions();
+                        this.loadRejectedSubmissions();
+                        this.renderPosts();
+                    } else {
+                        Utils.showNotification(result.message, true);
+                    }
+                } catch (error) {
+                    console.error('处理审核出错:', error);
+                    Utils.showNotification('处理审核时出错，请重试', true);
+                }
+            },
+            
+            // 加载已通过内容
+            loadApprovedSubmissions: function() {
+                try {
+                    const submissions = AppData.getApprovedSubmissions();
+                    const container = document.getElementById('approvedContainer');
+                    const noApproved = document.getElementById('noApproved');
+                    
+                    container.innerHTML = '';
+                    
+                    if (submissions.length === 0) {
+                        noApproved.classList.remove('hidden');
+                        return;
                     }
                     
-                    const categoryColor = AppData.getCategoryColor(submission.category);
-                    const categoryName = AppData.getCategoryName(submission.category);
+                    noApproved.classList.add('hidden');
                     
-                    const postElement = document.createElement('div');
-                    postElement.className = 'bg-white rounded-xl shadow-sm p-6 md:p-8 card-hover';
-                    postElement.innerHTML = `
-                        <div class="flex items-center mb-6">
-                            <img src="${submission.anonymous ? 'https://picsum.photos/id/1000/50/50' : AppData.users.find(u => u.id === submission.authorId)?.avatar}" alt="${submission.anonymous ? '匿名用户' : submission.authorName}" class="w-12 h-12 rounded-full object-cover mr-4">
-                            <div>
-                                <h4 class="font-medium">${submission.anonymous ? '匿名用户' : submission.authorName}</h4>
-                                <p class="text-sm text-gray-500">${Utils.formatDate(submission.submitTime)}</p>
+                    submissions.forEach(submission => {
+                        const categoryClass = submission.category === 'confession' ? 'bg-confession' : 
+                                             submission.category === 'complaint' ? 'bg-complaint' : 'bg-question';
+                        
+                        const categoryText = submission.category === 'confession' ? '表白墙' : 
+                                            submission.category === 'complaint' ? '吐槽区' : '提问区';
+                        
+                        let imagesHtml = '';
+                        if (submission.images && submission.images.length > 0) {
+                            imagesHtml = `
+                                <div class="grid grid-cols-3 gap-2 mt-3">
+                                    ${submission.images.map(img => `
+                                        <div class="aspect-square bg-gray-100 rounded-md overflow-hidden">
+                                            <img src="${img}" alt="发布图片" class="w-full h-full object-cover">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `;
+                        }
+                        
+                        const submissionElement = document.createElement('div');
+                        submissionElement.className = 'bg-white rounded-xl shadow-sm p-6';
+                        submissionElement.innerHTML = `
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <span class="section-indicator ${categoryClass}"></span>
+                                    <span class="text-sm font-medium">${categoryText}</span>
+                                </div>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">已通过</span>
                             </div>
-                            <span class="ml-auto bg-${categoryColor}/10 text-${categoryColor} text-xs px-3 py-1 rounded-full">${categoryName}</span>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4 hover:text-primary transition-colors">${submission.title}</h3>
-                        <p class="text-neutral mb-6">${submission.content}</p>
-                        ${imagesHtml}
-                        <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-                            <div class="flex items-center space-x-6">
-                                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
-                                    <i class="fa fa-thumbs-up mr-2"></i>
-                                    <span>赞同</span>
-                                </button>
-                                <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
-                                    <i class="fa fa-comment mr-2"></i>
-                                    <span>评论</span>
-                                </button>
+                            
+                            <h3 class="text-lg font-bold mb-3">${submission.title}</h3>
+                            
+                            <div class="text-gray-700 mb-4">${submission.content}</div>
+                            
+                            ${imagesHtml}
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="flex justify-between items-center text-sm text-gray-500 mb-3">
+                                    <div>
+                                        作者: ${submission.authorName} ${submission.anonymousRequest ? '(匿名)' : ''}
+                                    </div>
+                                    <div>
+                                        审核时间: ${Utils.formatDate(submission.approvedAt)}
+                                    </div>
+                                </div>
+                                
+                                ${submission.reviewNote ? `
+                                    <div class="bg-gray-50 p-3 rounded-lg text-sm">
+                                        <strong>审核备注:</strong> ${submission.reviewNote}
+                                    </div>
+                                ` : ''}
                             </div>
-                            <button class="flex items-center text-gray-500 hover:text-primary transition-colors">
-                                <i class="fa fa-share-alt mr-2"></i>
-                                <span>分享</span>
-                            </button>
-                        </div>
-                    `;
+                        `;
+                        
+                        container.appendChild(submissionElement);
+                    });
+                } catch (error) {
+                    console.error('加载已通过内容出错:', error);
+                }
+            },
+            
+            // 加载已拒绝内容
+            loadRejectedSubmissions: function() {
+                try {
+                    const submissions = AppData.getRejectedSubmissions();
+                    const container = document.getElementById('rejectedContainer');
+                    const noRejected = document.getElementById('noRejected');
                     
-                    postsContainer.insertBefore(postElement, noPosts);
-                });
+                    container.innerHTML = '';
+                    
+                    if (submissions.length === 0) {
+                        noRejected.classList.remove('hidden');
+                        return;
+                    }
+                    
+                    noRejected.classList.add('hidden');
+                    
+                    submissions.forEach(submission => {
+                        const categoryClass = submission.category === 'confession' ? 'bg-confession' : 
+                                             submission.category === 'complaint' ? 'bg-complaint' : 'bg-question';
+                        
+                        const categoryText = submission.category === 'confession' ? '表白墙' : 
+                                            submission.category === 'complaint' ? '吐槽区' : '提问区';
+                        
+                        let imagesHtml = '';
+                        if (submission.images && submission.images.length > 0) {
+                            imagesHtml = `
+                                <div class="grid grid-cols-3 gap-2 mt-3">
+                                    ${submission.images.map(img => `
+                                        <div class="aspect-square bg-gray-100 rounded-md overflow-hidden">
+                                            <img src="${img}" alt="发布图片" class="w-full h-full object-cover">
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `;
+                        }
+                        
+                        const submissionElement = document.createElement('div');
+                        submissionElement.className = 'bg-white rounded-xl shadow-sm p-6';
+                        submissionElement.innerHTML = `
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <span class="section-indicator ${categoryClass}"></span>
+                                    <span class="text-sm font-medium">${categoryText}</span>
+                                </div>
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">已拒绝</span>
+                            </div>
+                            
+                            <h3 class="text-lg font-bold mb-3">${submission.title}</h3>
+                            
+                            <div class="text-gray-700 mb-4">${submission.content}</div>
+                            
+                            ${imagesHtml}
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <div class="flex justify-between items-center text-sm text-gray-500 mb-3">
+                                    <div>
+                                        作者: ${submission.authorName}
+                                    </div>
+                                    <div>
+                                        审核时间: ${Utils.formatDate(submission.approvedAt)}
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 p-3 rounded-lg text-sm">
+                                    <strong>拒绝原因:</strong> ${submission.reviewNote || '未提供原因'}
+                                </div>
+                            </div>
+                        `;
+                        
+                        container.appendChild(submissionElement);
+                    });
+                } catch (error) {
+                    console.error('加载已拒绝内容出错:', error);
+                }
+            },
+            
+            // 渲染帖子列表
+            renderPosts: function(category = 'all') {
+                try {
+                    const postsContainer = document.getElementById('postsContainer');
+                    const loadingPosts = document.getElementById('loadingPosts');
+                    const noPosts = document.getElementById('noPosts');
+                    
+                    // 显示加载状态
+                    postsContainer.innerHTML = '';
+                    loadingPosts.classList.remove('hidden');
+                    noPosts.classList.add('hidden');
+                    
+                    // 模拟加载延迟
+                    setTimeout(() => {
+                        // 获取已通过的帖子
+                        let posts = AppData.getApprovedSubmissions();
+                        
+                        // 根据分类筛选
+                        if (category !== 'all') {
+                            posts = posts.filter(post => post.category === category);
+                        }
+                        
+                        // 按时间排序（最新的在前）
+                        posts.sort((a, b) => new Date(b.approvedAt) - new Date(a.approvedAt));
+                        
+                        // 隐藏加载状态
+                        loadingPosts.classList.add('hidden');
+                        
+                        if (posts.length === 0) {
+                            noPosts.classList.remove('hidden');
+                            return;
+                        }
+                        
+                        // 渲染帖子
+                        posts.forEach(post => {
+                            const categoryClass = post.category === 'confession' ? 'bg-confession' : 
+                                         post.category === 'complaint' ? 'bg-complaint' : 'bg-question';
+                            
+                            const categoryText = post.category === 'confession' ? '表白墙' : 
+                                        post.category === 'complaint' ? '吐槽区' : '提问区';
+                            
+                            let imagesHtml = '';
+                            if (post.images && post.images.length > 0) {
+                                imagesHtml = `
+                                    <div class="grid grid-cols-3 gap-2 mt-3">
+                                        ${post.images.map(img => `
+                                            <div class="aspect-square bg-gray-100 rounded-md overflow-hidden">
+                                                <img src="${img}" alt="发布图片" class="w-full h-full object-cover">
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                `;
+                            }
+                            
+                            const postElement = document.createElement('div');
+                            postElement.className = 'bg-white rounded-xl shadow-sm p-6 card-hover';
+                            postElement.innerHTML = `
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <span class="section-indicator ${categoryClass}"></span>
+                                        <span class="text-sm font-medium">${categoryText}</span>
+                                    </div>
+                                    <span class="text-xs text-gray-500">${Utils.formatDate(post.approvedAt)}</span>
+                                </div>
+                                
+                                <h3 class="text-lg font-bold mb-3">${post.title}</h3>
+                                
+                                <div class="text-gray-700 mb-4">${post.content}</div>
+                                
+                                ${imagesHtml}
+                                
+                                <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <img src="${post.authorAvatar || `https://picsum.photos/id/${parseInt(post.authorId.replace('user', '')) + 300}/40/40`}" alt="${post.anonymousRequest ? '匿名用户' : post.authorName}的头像" class="w-6 h-6 rounded-full mr-2">
+                                        <span class="text-sm">${post.anonymousRequest ? '匿名用户' : post.authorName}</span>
+                                    </div>
+                                    <div class="flex space-x-4">
+                                        <button class="text-gray-500 hover:text-primary transition-colors text-sm flex items-center">
+                                            <i class="fa fa-heart-o mr-1"></i> <span>0</span>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-primary transition-colors text-sm flex items-center">
+                                            <i class="fa fa-comment-o mr-1"></i> <span>0</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            postsContainer.appendChild(postElement);
+                        });
+                    }, 800);
+                } catch (error) {
+                    console.error('渲染帖子出错:', error);
+                    Utils.showNotification('加载帖子出错，请重试', true);
+                }
+            },
+            
+            // 渲染用户的发布
+            renderUserSubmissions: function() {
+                try {
+                    const submissions = AppData.getUserSubmissions();
+                    const container = document.getElementById('mySubmissionsContainer');
+                    const noSubmissions = document.getElementById('noSubmissions');
+                    
+                    container.innerHTML = '';
+                    
+                    if (submissions.length === 0) {
+                        noSubmissions.classList.remove('hidden');
+                        return;
+                    }
+                    
+                    noSubmissions.classList.add('hidden');
+                    
+                    // 按时间排序（最新的在前）
+                    submissions.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                    
+                    submissions.forEach(submission => {
+                        const categoryClass = submission.category === 'confession' ? 'bg-confession' : 
+                                     submission.category === 'complaint' ? 'bg-complaint' : 'bg-question';
+                        
+                        const categoryText = submission.category === 'confession' ? '表白墙' : 
+                                            submission.category === 'complaint' ? '吐槽区' : '提问区';
+                        
+                        let statusClass = '';
+                        let statusText = '';
+                        
+                        if (submission.status === 'pending') {
+                            statusClass = 'bg-yellow-100 text-yellow-800';
+                            statusText = '待审核';
+                        } else if (submission.status === 'approved') {
+                            statusClass = 'bg-green-100 text-green-800';
+                            statusText = '已通过';
+                        } else {
+                            statusClass = 'bg-red-100 text-red-800';
+                            statusText = '已拒绝';
+                        }
+                        
+                        const submissionElement = document.createElement('div');
+                        submissionElement.className = 'bg-white rounded-xl shadow-sm p-6 card-hover';
+                        submissionElement.innerHTML = `
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center">
+                                    <span class="section-indicator ${categoryClass}"></span>
+                                    <span class="text-sm font-medium">${categoryText}</span>
+                                </div>
+                                <span class="text-xs ${statusClass} px-2 py-1 rounded-full">${statusText}</span>
+                            </div>
+                            
+                            <h3 class="text-lg font-bold mb-3">${submission.title}</h3>
+                            
+                            <div class="text-gray-700 mb-4 line-clamp-2">${submission.content}</div>
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-sm text-gray-500">
+                                <div>提交时间: ${Utils.formatDate(submission.createdAt)}</div>
+                                ${submission.status !== 'pending' ? 
+                                    `<div>处理时间: ${Utils.formatDate(submission.approvedAt)}</div>` : ''}
+                            </div>
+                            
+                            ${submission.reviewNote ? `
+                                <div class="mt-3 p-3 bg-gray-50 rounded-lg text-sm">
+                                    <strong>审核备注:</strong> ${submission.reviewNote}
+                                </div>
+                            ` : ''}
+                        `;
+                        
+                        container.appendChild(submissionElement);
+                    });
+                } catch (error) {
+                    console.error('渲染用户发布出错:', error);
+                }
+            },
+            
+            // 渲染个人资料 - 确保头像正确显示
+            renderProfile: function() {
+                try {
+                    const currentUser = AppData.currentUser;
+                    if (!currentUser) return;
+                    
+                    const profileAvatar = document.getElementById('profileAvatar');
+                    profileAvatar.src = currentUser.avatar || 'https://picsum.photos/id/64/128/128';
+                    profileAvatar.alt = currentUser.name + '的头像';
+                    
+                    document.getElementById('profileName').textContent = currentUser.name;
+                    document.getElementById('profilePhone').value = currentUser.phone;
+                    document.getElementById('editName').value = currentUser.name;
+                    document.getElementById('editBio').value = currentUser.bio || '';
+                    document.getElementById('profileJoinDate').textContent = `加入时间: ${currentUser.joinDate}`;
+                } catch (error) {
+                    console.error('渲染个人资料出错:', error);
+                }
+            },
+            
+            // 高亮当前页面链接
+            highlightCurrentPage: function() {
+                try {
+                    // 获取当前URL的哈希部分
+                    const hash = window.location.hash || '#home';
+                    
+                    // 移除所有导航链接的高亮
+                    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+                        link.classList.remove('text-primary', 'font-semibold');
+                        link.classList.add('text-dark');
+                    });
+                    
+                    // 高亮当前页面的链接
+                    document.querySelectorAll(`.nav-link[href="${hash}"], .mobile-nav-link[href="${hash}"]`).forEach(link => {
+                        link.classList.remove('text-dark');
+                        link.classList.add('text-primary', 'font-semibold');
+                    });
+                } catch (error) {
+                    console.error('高亮当前页面出错:', error);
+                }
+            },
+            
+            // 绑定事件
+            bindEvents: function() {
+                try {
+                    // 导航栏滚动效果
+                    window.addEventListener('scroll', () => {
+                        const navbar = document.getElementById('navbar');
+                        if (window.scrollY > 50) {
+                            navbar.classList.add('py-2', 'shadow');
+                            navbar.classList.remove('py-3');
+                        } else {
+                            navbar.classList.add('py-3');
+                            navbar.classList.remove('py-2', 'shadow');
+                        }
+                    });
+                    
+                    // 移动端菜单切换
+                    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    
+                    if (Utils.elementExists('#mobileMenuBtn') && Utils.elementExists('#mobileMenu')) {
+                        mobileMenuBtn.addEventListener('click', () => {
+                            mobileMenu.classList.toggle('hidden');
+                        });
+                    }
+                    
+                    // 用户下拉菜单
+                    const userBtn = document.getElementById('userBtn');
+                    const dropdownMenu = document.getElementById('dropdownMenu');
+                    
+                    if (Utils.elementExists('#userBtn') && Utils.elementExists('#dropdownMenu')) {
+                        userBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            dropdownMenu.classList.toggle('hidden');
+                        });
+                    }
+                    
+                    // 点击其他地方关闭下拉菜单
+                    document.addEventListener('click', () => {
+                        if (Utils.elementExists('#dropdownMenu') && !document.getElementById('dropdownMenu').classList.contains('hidden')) {
+                            document.getElementById('dropdownMenu').classList.add('hidden');
+                        }
+                    });
+                    
+                    // 登录按钮
+                    if (Utils.elementExists('#loginBtn')) {
+                        document.getElementById('loginBtn').addEventListener('click', () => {
+                            Utils.showModal('loginModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#mobileLoginBtn')) {
+                        document.getElementById('mobileLoginBtn').addEventListener('click', () => {
+                            document.getElementById('mobileMenu').classList.add('hidden');
+                            Utils.showModal('loginModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#submitLoginBtn')) {
+                        document.getElementById('submitLoginBtn').addEventListener('click', () => {
+                            Utils.showModal('loginModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#submissionsLoginBtn')) {
+                        document.getElementById('submissionsLoginBtn').addEventListener('click', () => {
+                            Utils.showModal('loginModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#profileLoginBtn')) {
+                        document.getElementById('profileLoginBtn').addEventListener('click', () => {
+                            Utils.showModal('loginModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#adminLoginBtn')) {
+                        document.getElementById('adminLoginBtn').addEventListener('click', () => {
+                            Utils.showModal('loginModal');
+                        });
+                    }
+                    
+                    // 注册按钮
+                    if (Utils.elementExists('#registerBtn')) {
+                        document.getElementById('registerBtn').addEventListener('click', () => {
+                            Utils.showModal('registerModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#mobileRegisterBtn')) {
+                        document.getElementById('mobileRegisterBtn').addEventListener('click', () => {
+                            document.getElementById('mobileMenu').classList.add('hidden');
+                            Utils.showModal('registerModal');
+                        });
+                    }
+                    
+                    // 关闭模态框
+                    if (Utils.elementExists('#closeLoginModal')) {
+                        document.getElementById('closeLoginModal').addEventListener('click', () => {
+                            Utils.hideModal('loginModal');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#closeRegisterModal')) {
+                        document.getElementById('closeRegisterModal').addEventListener('click', () => {
+                            Utils.hideModal('registerModal');
+                        });
+                    }
+                    
+                    // 点击模态框外部关闭
+                    if (Utils.elementExists('#loginModal')) {
+                        document.getElementById('loginModal').addEventListener('click', (e) => {
+                            if (e.target === document.getElementById('loginModal')) {
+                                Utils.hideModal('loginModal');
+                            }
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#registerModal')) {
+                        document.getElementById('registerModal').addEventListener('click', (e) => {
+                            if (e.target === document.getElementById('registerModal')) {
+                                Utils.hideModal('registerModal');
+                            }
+                        });
+                    }
+                    
+                    // 切换登录/注册
+                    if (Utils.elementExists('#switchToRegister')) {
+                        document.getElementById('switchToRegister').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.hideModal('loginModal');
+                            setTimeout(() => {
+                                Utils.showModal('registerModal');
+                            }, 300);
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#switchToLogin')) {
+                        document.getElementById('switchToLogin').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            Utils.hideModal('registerModal');
+                            setTimeout(() => {
+                                Utils.showModal('loginModal');
+                            }, 300);
+                        });
+                    }
+                    
+                    // 登录表单提交
+                    if (Utils.elementExists('#loginForm')) {
+                        document.getElementById('loginForm').addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const phone = document.getElementById('loginPhone').value;
+                            const password = document.getElementById('loginPassword').value;
+                            
+                            // 简单验证
+                            if (!phone || !password) {
+                                Utils.showNotification('请输入手机号和密码', true);
+                                return;
+                            }
+                            
+                            const result = AppData.login(phone, password);
+                            if (result.success) {
+                                Utils.hideModal('loginModal');
+                                Utils.clearForm('loginForm');
+                                this.updatePageState();
+                                this.renderPosts();
+                                Utils.showNotification('登录成功');
+                            } else {
+                                Utils.showNotification(result.message, true);
+                            }
+                        });
+                    }
+                    
+                    // 注册表单提交
+                    if (Utils.elementExists('#registerForm')) {
+                        document.getElementById('registerForm').addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const phone = document.getElementById('registerPhone').value;
+                            const name = document.getElementById('registerName').value;
+                            const password = document.getElementById('registerPassword').value;
+                            
+                            // 简单验证
+                            if (!phone || !name || !password) {
+                                Utils.showNotification('请填写完整信息', true);
+                                return;
+                            }
+                            
+                            if (password.length < 6) {
+                                Utils.showNotification('密码长度不能少于6位', true);
+                                return;
+                            }
+                            
+                            const result = AppData.register({ phone, name, password });
+                            if (result.success) {
+                                Utils.hideModal('registerModal');
+                                Utils.clearForm('registerForm');
+                                this.updatePageState();
+                                this.renderPosts();
+                                Utils.showNotification('注册成功');
+                            } else {
+                                Utils.showNotification(result.message, true);
+                            }
+                        });
+                    }
+                    
+                    // 登出
+                    if (Utils.elementExists('#logoutBtn')) {
+                        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            AppData.logout();
+                            this.updatePageState();
+                            this.renderPosts();
+                            Utils.showNotification('已退出登录');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#mobileLogoutBtn')) {
+                        document.getElementById('mobileLogoutBtn').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            document.getElementById('mobileMenu').classList.add('hidden');
+                            AppData.logout();
+                            this.updatePageState();
+                            this.renderPosts();
+                            Utils.showNotification('已退出登录');
+                        });
+                    }
+                    
+                    // 发布内容表单提交
+                    if (Utils.elementExists('#submissionForm')) {
+                        document.getElementById('submissionForm').addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const title = document.getElementById('submissionTitle').value;
+                            const category = document.getElementById('submissionCategory').value;
+                            const content = document.getElementById('submissionContent').value;
+                            const anonymousRequest = document.getElementById('anonymousRequest').checked;
+                            
+                            // 获取预览图片
+                            const previewImages = document.querySelectorAll('#imagePreviewContainer img');
+                            const images = Array.from(previewImages).map(img => img.src);
+                            
+                            // 简单验证
+                            if (!title || !content) {
+                                Utils.showNotification('请填写标题和内容', true);
+                                return;
+                            }
+                            
+                            const result = AppData.submitContent({
+                                title,
+                                category,
+                                content,
+                                images,
+                                anonymousRequest
+                            });
+                            
+                            if (result.success) {
+                                // 重置表单
+                                Utils.clearForm('submissionForm');
+                                document.getElementById('imagePreviewContainer').innerHTML = '';
+                                
+                                // 显示成功提示
+                                document.getElementById('submissionForm').classList.add('hidden');
+                                document.getElementById('submissionSuccess').classList.remove('hidden');
+                                
+                                // 刷新我的发布
+                                this.renderUserSubmissions();
+                            } else {
+                                Utils.showNotification(result.message, true);
+                            }
+                        });
+                    }
+                    
+                    // 再发布一条
+                    if (Utils.elementExists('#submitAnotherBtn')) {
+                        document.getElementById('submitAnotherBtn').addEventListener('click', () => {
+                            document.getElementById('submissionSuccess').classList.add('hidden');
+                            document.getElementById('submissionForm').classList.remove('hidden');
+                        });
+                    }
+                    
+                    // 图片上传预览
+                    if (Utils.elementExists('#imageUpload')) {
+                        document.getElementById('imageUpload').addEventListener('change', (e) => {
+                            const files = e.target.files;
+                            const container = document.getElementById('imagePreviewContainer');
+                            
+                            // 最多上传3张图片
+                            if (container.children.length + files.length > 3) {
+                                Utils.showNotification('最多只能上传3张图片', true);
+                                return;
+                            }
+                            
+                            Array.from(files).forEach(file => {
+                                const reader = new FileReader();
+                                
+                                reader.onload = (event) => {
+                                    const previewDiv = document.createElement('div');
+                                    previewDiv.className = 'image-preview';
+                                    previewDiv.innerHTML = `
+                                        <img src="${event.target.result}" alt="预览图片">
+                                        <span class="remove-image" data-index="${container.children.length}">×</span>
+                                    `;
+                                    
+                                    container.appendChild(previewDiv);
+                                    
+                                    // 绑定删除图片事件
+                                    previewDiv.querySelector('.remove-image').addEventListener('click', function() {
+                                        previewDiv.remove();
+                                        // 重新索引
+                                        document.querySelectorAll('.remove-image').forEach((el, index) => {
+                                            el.setAttribute('data-index', index);
+                                        });
+                                    });
+                                };
+                                
+                                reader.readAsDataURL(file);
+                            });
+                            
+                            // 重置input，允许重复选择同一文件
+                            e.target.value = '';
+                        });
+                    }
+                    
+                    // 板块切换
+                    if (Utils.elementExists('#allPostsBtn')) {
+                        document.getElementById('allPostsBtn').addEventListener('click', () => {
+                            this.setActiveTab('allPostsBtn');
+                            this.renderPosts('all');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#confessionBtn')) {
+                        document.getElementById('confessionBtn').addEventListener('click', () => {
+                            this.setActiveTab('confessionBtn');
+                            this.renderPosts('confession');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#complaintBtn')) {
+                        document.getElementById('complaintBtn').addEventListener('click', () => {
+                            this.setActiveTab('complaintBtn');
+                            this.renderPosts('complaint');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#questionBtn')) {
+                        document.getElementById('questionBtn').addEventListener('click', () => {
+                            this.setActiveTab('questionBtn');
+                            this.renderPosts('question');
+                        });
+                    }
+                    
+                    // 审核标签页切换
+                    if (Utils.elementExists('#pendingReviewsBtn')) {
+                        document.getElementById('pendingReviewsBtn').addEventListener('click', () => {
+                            this.setActiveAdminTab('pendingReviewsBtn');
+                            document.getElementById('pendingReviewsContainer').classList.remove('hidden');
+                            document.getElementById('approvedContainer').classList.add('hidden');
+                            document.getElementById('rejectedContainer').classList.add('hidden');
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#approvedBtn')) {
+                        document.getElementById('approvedBtn').addEventListener('click', () => {
+                            this.setActiveAdminTab('approvedBtn');
+                            document.getElementById('pendingReviewsContainer').classList.add('hidden');
+                            document.getElementById('approvedContainer').classList.remove('hidden');
+                            document.getElementById('rejectedContainer').classList.add('hidden');
+                            this.loadApprovedSubmissions();
+                        });
+                    }
+                    
+                    if (Utils.elementExists('#rejectedBtn')) {
+                        document.getElementById('rejectedBtn').addEventListener('click', () => {
+                            this.setActiveAdminTab('rejectedBtn');
+                            document.getElementById('pendingReviewsContainer').classList.add('hidden');
+                            document.getElementById('approvedContainer').classList.add('hidden');
+                            document.getElementById('rejectedContainer').classList.remove('hidden');
+                            this.loadRejectedSubmissions();
+                        });
+                    }
+                    
+                    // 加载更多按钮
+                    if (Utils.elementExists('#loadMoreBtn')) {
+                        document.getElementById('loadMoreBtn').addEventListener('click', () => {
+                            // 实际应用中这里会加载更多内容
+                            Utils.showNotification('已加载全部内容');
+                        });
+                    }
+                    
+                    // 个人资料表单提交
+                    if (Utils.elementExists('#profileForm')) {
+                        document.getElementById('profileForm').addEventListener('submit', (e) => {
+                            e.preventDefault();
+                            const name = document.getElementById('editName').value;
+                            const bio = document.getElementById('editBio').value;
+                            const password = document.getElementById('editPassword').value;
+                            
+                            // 简单验证
+                            if (!name) {
+                                Utils.showNotification('请输入姓名', true);
+                                return;
+                            }
+                            
+                            if (password && password.length < 6) {
+                                Utils.showNotification('密码长度不能少于6位', true);
+                                return;
+                            }
+                            
+                            const result = AppData.updateProfile({ name, bio, password });
+                            if (result.success) {
+                                this.renderProfile();
+                                // 更新导航栏中的用户名和头像
+                                document.getElementById('usernameDisplay').textContent = name;
+                                document.getElementById('mobileUsername').textContent = name;
+                                Utils.showNotification('资料更新成功');
+                            } else {
+                                Utils.showNotification(result.message, true);
+                            }
+                        });
+                    }
+                    
+                    // 头像上传 - 允许所有用户更新头像
+                    if (Utils.elementExists('#avatarUpload')) {
+                        document.getElementById('avatarUpload').addEventListener('change', (e) => {
+                            const file = e.target.files[0];
+                            if (!file) return;
+                            
+                            // 检查文件类型
+                            if (!file.type.startsWith('image/')) {
+                                Utils.showNotification('请选择图片文件', true);
+                                return;
+                            }
+                            
+                            // 检查文件大小（5MB以内）
+                            if (file.size > 5 * 1024 * 1024) {
+                                Utils.showNotification('图片大小不能超过5MB', true);
+                                return;
+                            }
+                            
+                            const reader = new FileReader();
+                            
+                            reader.onload = (event) => {
+                                const result = AppData.updateProfile({ avatar: event.target.result });
+                                if (result.success) {
+                                    // 更新所有地方的头像显示
+                                    document.getElementById('profileAvatar').src = event.target.result;
+                                    document.getElementById('desktopAvatar').src = event.target.result;
+                                    document.getElementById('mobileAvatar').src = event.target.result;
+                                    Utils.showNotification('头像更新成功');
+                                } else {
+                                    Utils.showNotification('更新头像失败，请重试', true);
+                                }
+                            };
+                            
+                            reader.readAsDataURL(file);
+                        });
+                    }
+                    
+                    // 审核管理链接点击事件 - 修复无法进入的bug
+                    if (Utils.elementExists('#adminLink')) {
+                        document.getElementById('adminLink').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            try {
+                                // 确保是管理员才可以访问
+                                if (AppData.currentUser && AppData.currentUser.isAdmin) {
+                                    // 确保审核面板可见
+                                    document.getElementById('adminPanel').classList.remove('hidden');
+                                    // 隐藏其他面板
+                                    document.querySelectorAll('section[id]').forEach(section => {
+                                        if (section.id !== 'adminPanel') {
+                                            section.classList.add('hidden');
+                                        }
+                                    });
+                                    // 更新URL哈希
+                                    window.location.hash = '#adminPanel';
+                                    // 高亮当前页面
+                                    this.highlightCurrentPage();
+                                    // 加载待审核内容
+                                    this.loadPendingSubmissions();
+                                } else {
+                                    Utils.showNotification('你没有权限访问审核管理页面', true);
+                                }
+                            } catch (error) {
+                                console.error('进入审核页面出错:', error);
+                                Utils.showNotification('进入审核页面出错，请重试', true);
+                            }
+                        });
+                    }
+                    
+                    // 移动端审核管理链接点击事件 - 修复无法进入的bug
+                    if (Utils.elementExists('#mobileAdminLink')) {
+                        document.getElementById('mobileAdminLink').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            try {
+                                // 确保是管理员才可以访问
+                                if (AppData.currentUser && AppData.currentUser.isAdmin) {
+                                    // 关闭移动菜单
+                                    document.getElementById('mobileMenu').classList.add('hidden');
+                                    // 确保审核面板可见
+                                    document.getElementById('adminPanel').classList.remove('hidden');
+                                    // 隐藏其他面板
+                                    document.querySelectorAll('section[id]').forEach(section => {
+                                        if (section.id !== 'adminPanel') {
+                                            section.classList.add('hidden');
+                                        }
+                                    });
+                                    // 更新URL哈希
+                                    window.location.hash = '#adminPanel';
+                                    // 高亮当前页面
+                                    this.highlightCurrentPage();
+                                    // 加载待审核内容
+                                    this.loadPendingSubmissions();
+                                } else {
+                                    Utils.showNotification('你没有权限访问审核管理页面', true);
+                                }
+                            } catch (error) {
+                                console.error('进入审核页面出错:', error);
+                                Utils.showNotification('进入审核页面出错，请重试', true);
+                            }
+                        });
+                    }
+                    
+                    // 页面导航链接
+                    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+                        link.addEventListener('click', (e) => {
+                            const targetId = e.currentTarget.getAttribute('href').substring(1);
+                            
+                            // 隐藏所有部分
+                            document.querySelectorAll('section[id]').forEach(section => {
+                                section.classList.add('hidden');
+                            });
+                            
+                            // 显示目标部分
+                            const targetSection = document.getElementById(targetId);
+                            if (targetSection) {
+                                targetSection.classList.remove('hidden');
+                                
+                                // 关闭移动菜单
+                                document.getElementById('mobileMenu').classList.add('hidden');
+                                
+                                // 平滑滚动到顶部
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            } else {
+                                Utils.showNotification('页面不存在', true);
+                            }
+                        });
+                    });
+                } catch (error) {
+                    console.error('绑定事件出错:', error);
+                }
+            },
+            
+            // 设置活跃的标签页
+            setActiveTab: function(buttonId) {
+                try {
+                    // 移除所有按钮的活跃状态
+                    document.querySelectorAll('#allPostsBtn, #confessionBtn, #complaintBtn, #questionBtn').forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-white', 'text-dark', 'border', 'border-gray-200');
+                    });
+                    
+                    // 设置当前按钮为活跃状态
+                    const activeBtn = document.getElementById(buttonId);
+                    if (activeBtn) {
+                        activeBtn.classList.remove('bg-white', 'text-dark', 'border', 'border-gray-200');
+                        activeBtn.classList.add('bg-primary', 'text-white');
+                    }
+                } catch (error) {
+                    console.error('设置活跃标签页出错:', error);
+                }
+            },
+            
+            // 设置活跃的管理员标签页
+            setActiveAdminTab: function(buttonId) {
+                try {
+                    // 移除所有按钮的活跃状态
+                    document.querySelectorAll('#pendingReviewsBtn, #approvedBtn, #rejectedBtn').forEach(btn => {
+                        btn.classList.remove('bg-primary', 'text-white');
+                        btn.classList.add('bg-white', 'text-dark', 'border', 'border-gray-200');
+                    });
+                    
+                    // 设置当前按钮为活跃状态
+                    const activeBtn = document.getElementById(buttonId);
+                    if (activeBtn) {
+                        activeBtn.classList.remove('bg-white', 'text-dark', 'border', 'border-gray-200');
+                        activeBtn.classList.add('bg-primary', 'text-white');
+                    }
+                } catch (error) {
+                    console.error('设置活跃管理员标签页出错:', error);
+                }
             }
         };
 
         // 初始化应用
         document.addEventListener('DOMContentLoaded', () => {
-            ViewController.init();
+            try {
+                AppData.init();
+                ViewController.init();
+                
+                // 默认显示首页
+                const hash = window.location.hash || '#home';
+                document.querySelectorAll('section[id]').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                const defaultSection = document.querySelector(hash);
+                if (defaultSection) {
+                    defaultSection.classList.remove('hidden');
+                } else {
+                    document.getElementById('home').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('应用初始化出错:', error);
+                Utils.showNotification('应用加载失败，请刷新页面重试', true);
+            }
         });
     </script>
-</body>
-</html>
+    
